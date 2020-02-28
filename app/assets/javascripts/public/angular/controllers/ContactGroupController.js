@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("ContactGroupController", ["$scope", "$http", "$window", function($scope, $http, $window) {
     $scope.working = true;
     $scope.groups = {};

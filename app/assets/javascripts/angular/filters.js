@@ -1,4 +1,4 @@
-angular.module("sendmy.filters", [])
+angular.module("ronaldosurdi.filters", [])
   .filter("customJson", function() {
     return function(lista, keys, names) {
       var ret = [];

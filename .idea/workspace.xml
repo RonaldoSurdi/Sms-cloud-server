@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="64442149-df1c-4d95-a8ef-70c2edb9f40a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/AdministratorController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/AdministratorController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/CustomerController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/CustomerController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/HomeMessagesController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/HomeMessagesController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/LicenseController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/LicenseController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/LicenseMovementController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/LicenseMovementController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/OurCustomerController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/OurCustomerController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/PlanController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/PlanController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/PlanMovementController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/PlanMovementController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/RepresentativeController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/RepresentativeController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/RoleController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/admin/angular/controllers/RoleController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/angular/app.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/angular/app.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/angular/filters.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/angular/filters.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/angular/services.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/angular/services.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/CadastrosPublicosController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/CadastrosPublicosController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/CompraPacoteController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/CompraPacoteController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/ContactController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/ContactController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/ContactGroupController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/ContactGroupController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/EnvioSmsController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/EnvioSmsController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/FormContactController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/FormContactController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/FormContactGroupController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/FormContactGroupController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/PainelPrincipalController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/PainelPrincipalController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/RelatorioController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/RelatorioController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/RepresentantesController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/public/angular/controllers/RepresentantesController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/CustomerController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/CustomerController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/CustomerSaleController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/CustomerSaleController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/LicenseMovementController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/LicenseMovementController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/ProfileController.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/representante/angular/controllers/ProfileController.js" />
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/public/estilos.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/public/estilos.scss" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/base_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/base_mailer.rb" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/public_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/public_mailer.rb" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/representatives_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/representatives_mailer.rb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators/mailer/reset_password_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators/mailer/reset_password_instructions.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators/passwords/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators/passwords/edit.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators/passwords/new.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators/passwords/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators/sessions/new.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators/sessions/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/compra_licenca_do_representante_confirmada.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/compra_licenca_do_representante_confirmada.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/compra_plano_do_cliente_confirmada.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/compra_plano_do_cliente_confirmada.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/multiplas_compras_de_licencas_confirmadas.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/multiplas_compras_de_licencas_confirmadas.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/multiplas_compras_de_planos_confirmadas.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/multiplas_compras_de_planos_confirmadas.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_de_movimentacao_licenca.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_de_movimentacao_licenca.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_de_movimentacao_plano.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_de_movimentacao_plano.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_multipla_de_movimentacao_licenca.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_multipla_de_movimentacao_licenca.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_multipla_de_movimentacao_plano.html.erb" afterPath="$PROJECT_DIR$/app/views/administrators_mailer/notificacao_exclusao_multipla_de_movimentacao_plano.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/cadastro_clientes/new.html.erb" afterPath="$PROJECT_DIR$/app/views/cadastro_clientes/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/cadastro_representantes/new.html.erb" afterPath="$PROJECT_DIR$/app/views/cadastro_representantes/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/clientes/painel/index.html.erb" afterPath="$PROJECT_DIR$/app/views/clientes/painel/index.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/customers/mailer/confirmation_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/customers/mailer/confirmation_instructions.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/customers/mailer/reset_password_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/customers/mailer/reset_password_instructions.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/home/index.html.erb" afterPath="$PROJECT_DIR$/app/views/home/index.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_header_admin.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header_admin.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/admin.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/admin.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/representante.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/representante.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/politica_privacidade/index.html.erb" afterPath="$PROJECT_DIR$/app/views/politica_privacidade/index.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/public_mailer/fale_conosco_mensagem.html.erb" afterPath="$PROJECT_DIR$/app/views/public_mailer/fale_conosco_mensagem.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/publico/quem_somos/index.html.erb" afterPath="$PROJECT_DIR$/app/views/publico/quem_somos/index.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives/mailer/confirmation_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives/mailer/confirmation_instructions.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives/mailer/reset_password_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives/mailer/reset_password_instructions.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives/passwords/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives/passwords/edit.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives/passwords/new.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives/passwords/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives/sessions/new.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives/sessions/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/cadastro_aceito.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/cadastro_aceito.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/cadastro_rejeitado.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/cadastro_rejeitado.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/cliente_cadastrado.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/cliente_cadastrado.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_exclusao_de_movimentacao_licenca.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_exclusao_de_movimentacao_licenca.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_interesse_compra_licenca.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_interesse_compra_licenca.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_para_cliente_de_licenca_adquirida.html.erb" afterPath="$PROJECT_DIR$/app/views/representatives_mailer/notificacao_para_cliente_de_licenca_adquirida.html.erb" />
+      <change beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/constants.rb" afterPath="$PROJECT_DIR$/config/initializers/constants.rb" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/devise.rb" afterPath="$PROJECT_DIR$/config/initializers/devise.rb" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/zenvia.rb" afterPath="$PROJECT_DIR$/config/initializers/zenvia.rb" />
+      <change beforePath="$PROJECT_DIR$/config/locales/app.pt-BR.yml" afterPath="$PROJECT_DIR$/config/locales/app.pt-BR.yml" />
+      <change beforePath="$PROJECT_DIR$/config/locales/devise.pt-BR.yml" afterPath="$PROJECT_DIR$/config/locales/devise.pt-BR.yml" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
+      <change beforePath="$PROJECT_DIR$/lib/pagseguro_service.rb" afterPath="$PROJECT_DIR$/lib/pagseguro_service.rb" />
+      <change beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
+      <change beforePath="$PROJECT_DIR$/log/test.log" afterPath="$PROJECT_DIR$/log/test.log" />
+      <change beforePath="$PROJECT_DIR$/public/assets/admin/admin-bb6a3681185ed069b98df6f8031c0fb4.css" afterPath="$PROJECT_DIR$/public/assets/admin/admin-bb6a3681185ed069b98df6f8031c0fb4.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/admin/admin-ea7336ef5cf92a1a634e35fad230b0e1.js" afterPath="$PROJECT_DIR$/public/assets/admin/admin-ea7336ef5cf92a1a634e35fad230b0e1.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/admin/admin-eeec96e59b27cac00e4e8380fac8f0ab.js" afterPath="$PROJECT_DIR$/public/assets/admin/admin-eeec96e59b27cac00e4e8380fac8f0ab.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/admin/admin-fc29d97093fec3c16cd8e36e5f2ce106.js" afterPath="$PROJECT_DIR$/public/assets/admin/admin-fc29d97093fec3c16cd8e36e5f2ce106.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/manifest-1414cadd5eef6d0745a6b7c84ce5976b.json" afterPath="$PROJECT_DIR$/public/assets/manifest-1414cadd5eef6d0745a6b7c84ce5976b.json" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-4db27aa70228a64b1d840a40f1ab99c3.js" afterPath="$PROJECT_DIR$/public/assets/public/public-4db27aa70228a64b1d840a40f1ab99c3.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-5ae35f4332c3d5e9020ab1addd002f19.js" afterPath="$PROJECT_DIR$/public/assets/public/public-5ae35f4332c3d5e9020ab1addd002f19.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-8e7e3d2372daec19c1f42d1dce4bfccc.css" afterPath="$PROJECT_DIR$/public/assets/public/public-8e7e3d2372daec19c1f42d1dce4bfccc.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-97633f372c2275adb89c592c0925f195.css" afterPath="$PROJECT_DIR$/public/assets/public/public-97633f372c2275adb89c592c0925f195.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-d0623061bb9ea0766444b4462b18a60c.css" afterPath="$PROJECT_DIR$/public/assets/public/public-d0623061bb9ea0766444b4462b18a60c.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/public/public-d1ca79c7f46afbb86efc23a23f1f4b7d.js" afterPath="$PROJECT_DIR$/public/assets/public/public-d1ca79c7f46afbb86efc23a23f1f4b7d.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/representante/representante-57d1b9adeb6c764d9cc85f3e85f12826.js" afterPath="$PROJECT_DIR$/public/assets/representante/representante-57d1b9adeb6c764d9cc85f3e85f12826.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/representante/representante-87896bb82539d82f22a52b570d1cdd54.css" afterPath="$PROJECT_DIR$/public/assets/representante/representante-87896bb82539d82f22a52b570d1cdd54.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/representante/representante-9eeac037cf22c350f580788368e8e8aa.js" afterPath="$PROJECT_DIR$/public/assets/representante/representante-9eeac037cf22c350f580788368e8e8aa.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/representante/representante-e9cccbf52b3c4af8bfed8347b3aa6622.js" afterPath="$PROJECT_DIR$/public/assets/representante/representante-e9cccbf52b3c4af8bfed8347b3aa6622.js" />
+      <change beforePath="$PROJECT_DIR$/public/humans.txt" afterPath="$PROJECT_DIR$/public/humans.txt" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sendmy.net</find>
+      <find>sendmy</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>ronaldo.surdi</replace>
+      <replace>ronaldosurdi</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>D:\github\SendMySMS</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="FORCE_PUSH_ALLOWED" value="false" />
+  </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="$USER_HOME$/AppData/Roaming/npm/node_modules/bower" />
+    <bower.json value="" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1913" />
+    <option name="width" value="1932" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="64442149-df1c-4d95-a8ef-70c2edb9f40a" name="Default" comment="" />
+      <created>1582881209133</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582881209133</updated>
+      <workItem from="1582881210481" duration="178000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="178000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1913" y="0" width="1932" height="1047" extended-state="0" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25267094" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>

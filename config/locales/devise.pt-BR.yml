@@ -72,4 +72,4 @@ pt-BR:
         other: "Não foi possível salvar %{resource}: %{count} erros."
   mailer:
     default:
-      from: "SendMy <automatico@sendmy.net>"
+      from: "ronaldosurdi <automatico@ronaldo.surdi>"

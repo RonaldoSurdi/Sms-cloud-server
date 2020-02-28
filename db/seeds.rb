@@ -30,12 +30,12 @@ elsif Administrator.where(main_administrator: true).count.zero?
   end
 end
 
-#ALTERAR DEPOIS PARA AS REAIS INFORMAÇÕES DA SENDMY
+#ALTERAR DEPOIS PARA AS REAIS INFORMAÇÕES DA ronaldosurdi
 if Representative.representante_principal.count.zero?
-  puts "Inserindo representante principal 'SendMy'"
+  puts "Inserindo representante principal 'ronaldosurdi'"
 
-  Representative.create! nome_fantasia: "SendMy", razao_social: "SendMy", cnpj: "11.660.655/0560-86", responsavel: "SendMy", telefone: "(54) 9999-9999",
-                          email: EMAIL_SENDMY, password: "connect123", password_confirmation: "connect123", confirmed_at: Date.today,
+  Representative.create! nome_fantasia: "ronaldosurdi", razao_social: "ronaldosurdi", cnpj: "11.660.655/0560-86", responsavel: "ronaldosurdi", telefone: "(54) 9999-9999",
+                          email: EMAIL_ronaldosurdi, password: "connect123", password_confirmation: "connect123", confirmed_at: Date.today,
                           cadastro_aprovado: true, representante_principal: true,
                           endereco_attributes: {logradouro: "Rua Qualquer Coisa, 99", bairro: "Centro", cidade: "Erechim", uf: "RS", cep: "99700-000"}
 end

@@ -1,4 +1,4 @@
 Zenvia.configure do |config|
-  config.account = 'sendmy.web'
+  config.account = 'ronaldosurdi.web'
   config.code = 'gt03wk7CUA'
 end

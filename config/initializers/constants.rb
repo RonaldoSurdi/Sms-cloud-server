@@ -1,3 +1,3 @@
-EMAIL_SENDMY = "contato@sendmy.net"
-EMAIL_CONTATO = EMAIL_SENDMY
-EMAIL_NOREPLY = "automatico@sendmy.net" #possui um "automatico@sendmy.net" em '/var/www/sendmy/config/locales/devise.pt-BR.yml' e '/var/www/sendmy/config/initializers/devise.rb'
+EMAIL_ronaldosurdi = "contato@ronaldo.surdi"
+EMAIL_CONTATO = EMAIL_ronaldosurdi
+EMAIL_NOREPLY = "automatico@ronaldo.surdi" #possui um "automatico@ronaldo.surdi" em '/var/www/ronaldosurdi/config/locales/devise.pt-BR.yml' e '/var/www/ronaldosurdi/config/initializers/devise.rb'

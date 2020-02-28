@@ -1,5 +1,5 @@
 class PagseguroService
-  EMAIL = "financeiro@sendmy.net"
+  EMAIL = "financeiro@ronaldo.surdi"
   TOKEN = "D08B098F082A4FFF9875B223D3DC51D0"
   ENVIRONMENT = :production
 

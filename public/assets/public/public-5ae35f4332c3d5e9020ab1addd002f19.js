@@ -60820,7 +60820,7 @@ if (objectTypes[typeof module]) {
 })();
 
 })(angular);
-angular.module("sendmy.filters", [])
+angular.module("ronaldosurdi.filters", [])
   .filter("customJson", function() {
     return function(lista, keys, names) {
       var ret = [];
@@ -61127,7 +61127,7 @@ $(document).on("page:change", function() {
     return new Date(new Date().getFullYear(), month, 0).getDate();
   }
 });
-angular.module("sendmy.services", [])
+angular.module("ronaldosurdi.services", [])
 
 .factory("Ordering",function() {
   return {
@@ -61191,7 +61191,7 @@ angular.module("sendmy.services", [])
   };
 });
 (function() {
-  window.sendmy = angular.module("sendmy", ["ngRoute", "bgf.paginateAnything", "sendmy.services", "sendmy.filters", "ui.utils.masks"])
+  window.ronaldosurdi = angular.module("ronaldosurdi", ["ngRoute", "bgf.paginateAnything", "ronaldosurdi.services", "ronaldosurdi.filters", "ui.utils.masks"])
 
   .directive("ngEnter", function() {
     return function(scope, element, attrs) {
@@ -61215,9 +61215,9 @@ $(document).on('page:change', function(){
   clearInterval(window.intervalRelatorios);
   clearInterval(window.intervalAdminDashboard);
 
-  angular.bootstrap(document.body, ['sendmy']);
+  angular.bootstrap(document.body, ['ronaldosurdi']);
 });
-sendmy
+ronaldosurdi
   .controller("RepresentantesController", ["$scope", "$http", "$window", "Formating", function($scope, $http, $window, Formating) {
   $scope.estados = [];
   $scope.estadoSelecionado = {};
@@ -61290,7 +61290,7 @@ sendmy
     return Formating.phoneFormat(telefone);
   }
 }]);
-sendmy
+ronaldosurdi
   .controller("PainelPrincipalController", ["$scope", "$http", "$window", function($scope, $http, $window) {
 
   var REFRESH_INTERVAL = 10;
@@ -61428,7 +61428,7 @@ sendmy
     $scope.saldo -= desconto;
   }
 }]);
-sendmy
+ronaldosurdi
   .controller("ContactController", ["$scope", "$http", "$window", "Formating", function($scope, $http, $window, Formating) {
 
     var MAX_ITEMS_IN_LIMITED_STRING_ARRAY = 10;
@@ -61563,7 +61563,7 @@ sendmy
 
     inicializarContatos();
   }]);
-sendmy
+ronaldosurdi
   .controller("FormContactController", ["$scope", "$http", "filterFilter", "Formating", function($scope, $http, filterFilter, Formating) {
     $scope.working = false;
     $scope.selectedGroup;
@@ -61687,7 +61687,7 @@ sendmy
       $scope.contactGroupParams = {};
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("ContactGroupController", ["$scope", "$http", "$window", function($scope, $http, $window) {
     $scope.working = true;
     $scope.groups = {};
@@ -61758,7 +61758,7 @@ sendmy
       });
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("FormContactGroupController", ["$scope", "$http", "filterFilter", "Formating", function($scope, $http, filterFilter, Formating) {
     $scope.working = true;
     $scope.contacts;
@@ -61866,7 +61866,7 @@ sendmy
 
     inicializarContatos();
   }]);
-sendmy
+ronaldosurdi
   .controller("EnvioSmsController", ["$scope", "$http", "$window", "Formating", "filterFilter", function($scope, $http, $window, Formating, filterFilter) {
     $scope.mensagem;
     $scope.contatos = [];
@@ -61987,7 +61987,7 @@ sendmy
 
     inicializar();
   }]);
-sendmy
+ronaldosurdi
   .controller("RelatorioController", ["$scope", "$http", "$interval", "$rootScope", function($scope, $http, $interval, $rootScope) {
 
   var REFRESH_INTERVAL = 30;
@@ -62010,7 +62010,7 @@ sendmy
     inicializar();
   }
 }]);
-sendmy
+ronaldosurdi
   .controller("CompraPacoteController", ["$scope", "$http", "$window", function($scope, $http, $window) {
   $scope.buscando = false;
   $scope.pacote;

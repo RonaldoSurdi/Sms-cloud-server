@@ -1,5 +1,5 @@
 class PublicMailer < BaseMailer
-  default to: "SendMy <#{EMAIL_CONTATO}>"
+  default to: "ronaldosurdi <#{EMAIL_CONTATO}>"
 
   def fale_conosco_mensagem(informacoes_contato)
     @nome = informacoes_contato["nome"]

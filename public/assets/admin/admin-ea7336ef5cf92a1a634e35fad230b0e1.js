@@ -59556,7 +59556,7 @@ if (objectTypes[typeof module]) {
 })();
 
 })(angular);
-angular.module("sendmy.filters", [])
+angular.module("ronaldosurdi.filters", [])
   .filter("customJson", function() {
     return function(lista, keys, names) {
       var ret = [];
@@ -59589,7 +59589,7 @@ angular.module("sendmy.filters", [])
 
 
 
-angular.module("sendmy.services", [])
+angular.module("ronaldosurdi.services", [])
 
 .factory("Ordering",function() {
   return {
@@ -59653,7 +59653,7 @@ angular.module("sendmy.services", [])
   };
 });
 (function() {
-  window.sendmy = angular.module("sendmy", ["ngRoute", "bgf.paginateAnything", "sendmy.services", "sendmy.filters", "ui.utils.masks"])
+  window.ronaldosurdi = angular.module("ronaldosurdi", ["ngRoute", "bgf.paginateAnything", "ronaldosurdi.services", "ronaldosurdi.filters", "ui.utils.masks"])
 
   .directive("ngEnter", function() {
     return function(scope, element, attrs) {
@@ -59677,9 +59677,9 @@ $(document).on('page:change', function(){
   clearInterval(window.intervalRelatorios);
   clearInterval(window.intervalAdminDashboard);
 
-  angular.bootstrap(document.body, ['sendmy']);
+  angular.bootstrap(document.body, ['ronaldosurdi']);
 });
-sendmy
+ronaldosurdi
   .controller("AdministratorController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.administradores = [];
     $scope.filters = {};
@@ -59702,7 +59702,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("CustomerController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.customers = [];
     $scope.filters = {};
@@ -59725,7 +59725,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("HomeMessagesController", ["$scope", "$http", "$window", "$filter", function($scope, $http, $window, $filter) {
   var ENUM_PERIODOS = {
     seisMeses: 0,
@@ -59903,7 +59903,7 @@ sendmy
     return contagem;
   };
 }]);
-sendmy
+ronaldosurdi
   .controller("LicenseController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.licencas = [];
     $scope.filters = {};
@@ -59926,7 +59926,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("LicenseMovementController", ["$scope", "$http", "Ordering", "filterFilter", function($scope, $http, Ordering, filterFilter) {
     $scope.movimentacaoLicencas = [];
     $scope.filters = {};
@@ -60006,7 +60006,7 @@ sendmy
       };
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("OurCustomerController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.our_customers = [];
     $scope.filters = {};
@@ -60029,7 +60029,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("PlanController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.plans = [];
     $scope.filters = {};
@@ -60052,7 +60052,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("PlanMovementController", ["$scope", "$http", "Ordering", "filterFilter", function($scope, $http, Ordering, filterFilter) {
     $scope.movimentacaoPlanos = [];
     $scope.filters = {};
@@ -60132,7 +60132,7 @@ sendmy
       };
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("RepresentativeController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.representatives = [];
     $scope.filters = {};
@@ -60155,7 +60155,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("RoleController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.roles = [];
     $scope.filters = {};

@@ -1,4 +1,4 @@
-angular.module("sendmy.services", [])
+angular.module("ronaldosurdi.services", [])
 
 .factory("Ordering",function() {
   return {

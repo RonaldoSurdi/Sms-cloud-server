@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("PlanController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.plans = [];
     $scope.filters = {};

@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("CustomerSaleController", ["$scope", "$http", "$window", "Ordering", function($scope, $http, $window, Ordering) {
     COLOURS = ["blue", "orange", "red", "purple"];
 

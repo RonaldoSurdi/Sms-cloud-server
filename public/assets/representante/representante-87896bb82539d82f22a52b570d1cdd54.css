@@ -26721,45 +26721,45 @@ tr[data-href] td {
 .fa-medium:before {
   content: "\f23a";
 }
-/* line 1, /var/www/sendmy/app/assets/stylesheets/representante/home_style.css.scss */
+/* line 1, /var/www/ronaldosurdi/app/assets/stylesheets/representante/home_style.css.scss */
 .loader {
   float: right;
   margin: 10px 5px 0;
 }
 
-/* line 6, /var/www/sendmy/app/assets/stylesheets/representante/home_style.css.scss */
+/* line 6, /var/www/ronaldosurdi/app/assets/stylesheets/representante/home_style.css.scss */
 li.disabled {
   color: #777;
   background: #eee;
 }
 
-/* line 11, /var/www/sendmy/app/assets/stylesheets/representante/home_style.css.scss */
+/* line 11, /var/www/ronaldosurdi/app/assets/stylesheets/representante/home_style.css.scss */
 .list-group-sortable-connected li[draggable] {
   cursor: pointer;
 }
 
-/* line 15, /var/www/sendmy/app/assets/stylesheets/representante/home_style.css.scss */
+/* line 15, /var/www/ronaldosurdi/app/assets/stylesheets/representante/home_style.css.scss */
 a.accordion-toggle {
   text-decoration: none !important;
 }
 
-/* line 19, /var/www/sendmy/app/assets/stylesheets/representante/home_style.css.scss */
+/* line 19, /var/www/ronaldosurdi/app/assets/stylesheets/representante/home_style.css.scss */
 a.accordion-toggle:hover {
   color: #DDD !important;
 }
-/* line 1, /var/www/sendmy/app/assets/stylesheets/representante/license_movements.css.scss */
+/* line 1, /var/www/ronaldosurdi/app/assets/stylesheets/representante/license_movements.css.scss */
 input[name="license_movement[license_ids][]"] {
   position: relative;
   bottom: -2px;
 }
 
-/* line 7, /var/www/sendmy/app/assets/stylesheets/representante/license_movements.css.scss */
+/* line 7, /var/www/ronaldosurdi/app/assets/stylesheets/representante/license_movements.css.scss */
 .pricing-table .header {
   height: 110px;
   vertical-align: middle;
   overflow: hidden;
 }
-/* line 13, /var/www/sendmy/app/assets/stylesheets/representante/license_movements.css.scss */
+/* line 13, /var/www/ronaldosurdi/app/assets/stylesheets/representante/license_movements.css.scss */
 .pricing-table .price {
   width: 80% !important;
   left: 25% !important;
@@ -26767,12 +26767,12 @@ input[name="license_movement[license_ids][]"] {
   overflow: hidden !important;
   top: 80px !important;
 }
-/* line 22, /var/www/sendmy/app/assets/stylesheets/representante/license_movements.css.scss */
+/* line 22, /var/www/ronaldosurdi/app/assets/stylesheets/representante/license_movements.css.scss */
 .pricing-table .footer.row {
   padding: 10px 0 0 0;
   margin: 0;
 }
-/* line 27, /var/www/sendmy/app/assets/stylesheets/representante/license_movements.css.scss */
+/* line 27, /var/www/ronaldosurdi/app/assets/stylesheets/representante/license_movements.css.scss */
 .pricing-table input[type=number] {
   text-align: center;
 }
@@ -26782,22 +26782,22 @@ input[name="license_movement[license_ids][]"] {
 
 
  */
-/* line 9, /var/www/sendmy/app/assets/stylesheets/representante/representante.css.scss */
+/* line 9, /var/www/ronaldosurdi/app/assets/stylesheets/representante/representante.css.scss */
 * {
   outline: none !important;
 }
 
-/* line 13, /var/www/sendmy/app/assets/stylesheets/representante/representante.css.scss */
+/* line 13, /var/www/ronaldosurdi/app/assets/stylesheets/representante/representante.css.scss */
 .cursor-pointer {
   cursor: pointer;
 }
 
-/* line 17, /var/www/sendmy/app/assets/stylesheets/representante/representante.css.scss */
+/* line 17, /var/www/ronaldosurdi/app/assets/stylesheets/representante/representante.css.scss */
 .padding-top {
   padding-top: 5px;
 }
 
-/* line 21, /var/www/sendmy/app/assets/stylesheets/representante/representante.css.scss */
+/* line 21, /var/www/ronaldosurdi/app/assets/stylesheets/representante/representante.css.scss */
 #bg-loader {
   opacity: 0.6;
   color: #FFF;
@@ -26810,7 +26810,7 @@ input[name="license_movement[license_ids][]"] {
   z-index: 1030 !important;
   background-color: black;
 }
-/* line 34, /var/www/sendmy/app/assets/stylesheets/representante/representante.css.scss */
+/* line 34, /var/www/ronaldosurdi/app/assets/stylesheets/representante/representante.css.scss */
 #bg-loader div {
   position: fixed;
   left: 50%;

@@ -26721,28 +26721,28 @@ tr[data-href] td {
 .fa-medium:before {
   content: "\f23a";
 }
-/* line 1, /var/www/sendmy/app/assets/stylesheets/admin/customer.css.scss */
+/* line 1, /var/www/ronaldosurdi/app/assets/stylesheets/admin/customer.css.scss */
 .cursor-pointer {
   cursor: pointer;
 }
-/* line 1, /var/www/sendmy/app/assets/stylesheets/admin/home_style.css.scss */
+/* line 1, /var/www/ronaldosurdi/app/assets/stylesheets/admin/home_style.css.scss */
 .loader {
   float: right;
   margin: 10px 5px 0;
 }
 
-/* line 6, /var/www/sendmy/app/assets/stylesheets/admin/home_style.css.scss */
+/* line 6, /var/www/ronaldosurdi/app/assets/stylesheets/admin/home_style.css.scss */
 li.disabled {
   color: #777;
   background: #eee;
 }
 
-/* line 11, /var/www/sendmy/app/assets/stylesheets/admin/home_style.css.scss */
+/* line 11, /var/www/ronaldosurdi/app/assets/stylesheets/admin/home_style.css.scss */
 .list-group-sortable-connected li[draggable] {
   cursor: pointer;
 }
 
-/* line 16, /var/www/sendmy/app/assets/stylesheets/admin/home_style.css.scss */
+/* line 16, /var/www/ronaldosurdi/app/assets/stylesheets/admin/home_style.css.scss */
 .box-content.box-statistic:hover {
   -webkit-box-shadow: 0px 0px 5px 0px #61A0FF;
   box-shadow: 0px 0px 5px 0px #61A0FF;
@@ -26754,7 +26754,7 @@ li.disabled {
 
 
  */
-/* line 10, /var/www/sendmy/app/assets/stylesheets/admin/admin.css.scss */
+/* line 10, /var/www/ronaldosurdi/app/assets/stylesheets/admin/admin.css.scss */
 label.label-check, label.label-check input.checkbox_confirmar {
   cursor: pointer;
 }

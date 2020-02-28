@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("EnvioSmsController", ["$scope", "$http", "$window", "Formating", "filterFilter", function($scope, $http, $window, Formating, filterFilter) {
     $scope.mensagem;
     $scope.contatos = [];

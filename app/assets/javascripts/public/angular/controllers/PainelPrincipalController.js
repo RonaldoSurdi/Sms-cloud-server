@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("PainelPrincipalController", ["$scope", "$http", "$window", function($scope, $http, $window) {
 
   var REFRESH_INTERVAL = 10;

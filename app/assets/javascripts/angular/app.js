@@ -1,5 +1,5 @@
 (function() {
-  window.sendmy = angular.module("sendmy", ["ngRoute", "bgf.paginateAnything", "sendmy.services", "sendmy.filters", "ui.utils.masks"])
+  window.ronaldosurdi = angular.module("ronaldosurdi", ["ngRoute", "bgf.paginateAnything", "ronaldosurdi.services", "ronaldosurdi.filters", "ui.utils.masks"])
 
   .directive("ngEnter", function() {
     return function(scope, element, attrs) {
@@ -23,5 +23,5 @@ $(document).on('page:change', function(){
   clearInterval(window.intervalRelatorios);
   clearInterval(window.intervalAdminDashboard);
 
-  angular.bootstrap(document.body, ['sendmy']);
+  angular.bootstrap(document.body, ['ronaldosurdi']);
 });

@@ -1,5 +1,5 @@
 /* TEAM */
-Developer: SendMy
-Contact: admin [at] sendmy.net
-Twitter: @sendmy
+Developer: ronaldosurdi
+Contact: admin [at] ronaldo.surdi
+Twitter: @ronaldosurdi
 From: Santa Catarina, Brazil

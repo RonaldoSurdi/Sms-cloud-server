@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("RelatorioController", ["$scope", "$http", "$interval", "$rootScope", function($scope, $http, $interval, $rootScope) {
 
   var REFRESH_INTERVAL = 30;

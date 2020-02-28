@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("ContactController", ["$scope", "$http", "$window", "Formating", function($scope, $http, $window, Formating) {
 
     var MAX_ITEMS_IN_LIMITED_STRING_ARRAY = 10;

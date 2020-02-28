@@ -58790,7 +58790,7 @@ if (objectTypes[typeof module]) {
 })();
 
 })(angular);
-angular.module("sendmy.filters", [])
+angular.module("ronaldosurdi.filters", [])
   .filter("customJson", function() {
     return function(lista, keys, names) {
       var ret = [];
@@ -58823,7 +58823,7 @@ angular.module("sendmy.filters", [])
 
 
 
-angular.module("sendmy.services", [])
+angular.module("ronaldosurdi.services", [])
 
 .factory("Ordering",function() {
   return {
@@ -58887,7 +58887,7 @@ angular.module("sendmy.services", [])
   };
 });
 (function() {
-  window.sendmy = angular.module("sendmy", ["ngRoute", "bgf.paginateAnything", "sendmy.services", "sendmy.filters", "ui.utils.masks"])
+  window.ronaldosurdi = angular.module("ronaldosurdi", ["ngRoute", "bgf.paginateAnything", "ronaldosurdi.services", "ronaldosurdi.filters", "ui.utils.masks"])
 
   .directive("ngEnter", function() {
     return function(scope, element, attrs) {
@@ -58911,9 +58911,9 @@ $(document).on('page:change', function(){
   clearInterval(window.intervalRelatorios);
   clearInterval(window.intervalAdminDashboard);
 
-  angular.bootstrap(document.body, ['sendmy']);
+  angular.bootstrap(document.body, ['ronaldosurdi']);
 });
-sendmy
+ronaldosurdi
   .controller("CustomerController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.representantes = [];
     $scope.filters = {};
@@ -58936,7 +58936,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("LicenseMovementController", ["$scope", "$http", "Ordering", function($scope, $http, Ordering) {
     $scope.movimentacaoLicencas = [];
     $scope.filters = {};
@@ -58959,7 +58959,7 @@ sendmy
       return Ordering.orderClass(order, $scope.filters.order);
     }
   }]);
-sendmy
+ronaldosurdi
   .controller("ProfileController", ["$scope", "$http", function($scope, $http) {
     $scope.address = {};
     $scope.cepSearch = {};
@@ -59000,7 +59000,7 @@ $(document).on("page:change", function() {
     $("body").scrollTop(0);
   });
 });
-sendmy
+ronaldosurdi
   .controller("CustomerSaleController", ["$scope", "$http", "$window", "Ordering", function($scope, $http, $window, Ordering) {
     COLOURS = ["blue", "orange", "red", "purple"];
 

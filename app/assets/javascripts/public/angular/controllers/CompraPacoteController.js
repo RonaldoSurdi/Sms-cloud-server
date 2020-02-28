@@ -1,4 +1,4 @@
-sendmy
+ronaldosurdi
   .controller("CompraPacoteController", ["$scope", "$http", "$window", function($scope, $http, $window) {
   $scope.buscando = false;
   $scope.pacote;

@@ -83,10 +83,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV["URL"] || "localhost", port: ENV["URL"] ? 80 : 3000 }
 
   config.action_mailer.smtp_settings = {
-    address: "mail.sendmy.net",
+    address: "mail.ronaldo.surdi",
     port: 587,
-    domain: "sendmy.net",
-    user_name: "automatico@sendmy.net",
+    domain: "ronaldo.surdi",
+    user_name: "automatico@ronaldo.surdi",
     password: "QC9vpYnL@",
     authentication: :plain,
     enable_starttls_auto: true,
