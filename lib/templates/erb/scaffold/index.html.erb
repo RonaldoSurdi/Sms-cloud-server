@@ -1,0 +1,61 @@
+<%% content_for :actions, actions(:<%= singular_table_name %>) %>
+<%% content_for :angular_controller, "<%= singular_table_name.camelize %>Controller" %>
+
+<%% content_for :filtros do  %>
+  <%%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%%= init_angular([:filter]) %>; canEdit=<%%= can?(:update, <%= singular_table_name.camelize %>) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%%= label_tag :filter, "Filtro" %>
+          <%%= text_field_tag :filter, @filter, title: "Pesquise por campos da tabela", autofocus: true, placeholder: "Pesquisar",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <%% end %>
+<%% end %>
+
+<%% content_for :resultados do  %>
+  <p ng-show="<%= plural_table_name %>.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="<%= plural_table_name %>">
+    <thead>
+      <tr>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+        <th ng-click="order('<%= plural_table_name %>.<%= attribute.name %>')" class="{{orderClass('<%= plural_table_name %>.<%= attribute.name %>')}}"><%= attribute.human_name %></th>
+<% end -%>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{<%= singular_table_name %>.show_html_url}}" ng-repeat="<%= singular_table_name %> in <%= plural_table_name %> track by <%= singular_table_name %>.id">
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+        <td>{{<%= singular_table_name %>.<%= attribute.name %>}}</td>
+<% end -%>
+        <td class="text-right">
+          <a href="{{<%= singular_table_name %>.edit_html_url}}" class="btn btn-success btn-xs" ng-if="canEdit">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="<%= plural_table_name %>"
+    url="'<%%= <%= plural_table_name %>_path(format: :json) %>'"
+    template-url="<%%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<%% end %>

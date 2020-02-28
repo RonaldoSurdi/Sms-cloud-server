@@ -1,0 +1,97 @@
+<section class="<%= "#{action_name}_#{controller_name.singularize}" %>"
+          ng-init="groups = <%= serialize_json_angular @groups %>; initEdition(<%= serialize_json_angular @contact %>, <%= serialize_json_angular @contact.groups %>)">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+
+      <div class="form-inputs">
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.nome.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :nome, autofocus: true, input_html: {"ng-model" => "contactParams.nome"}, hint: "{{fieldsErrors.nome[0]}}" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.sexo.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :sexo, as: :radio_buttons,
+                            collection: Contact.sexos,
+                            label_method: ->(action_label) { action_label.first.titleize },
+                            value_method: :last,
+                            item_wrapper_class: "inline-radio-buttons",
+                            hint: "{{fieldsErrors.sexo[0]}}",
+                            input_html: { "ng-model" => "contactParams.sexo" } %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.celular.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :celular, input_html: {"data-mascara" => "telefone", "ng-model" => "contactParams.celular"}, hint: "{{fieldsErrors.celular[0]}}" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.email.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :email, input_html: {"ng-model" => "contactParams.email"}, hint: "{{fieldsErrors.email[0]}}" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.empresa.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :empresa, input_html: {"ng-model" => "contactParams.empresa"}, hint: "{{fieldsErrors.empresa[0]}}" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 {{(fieldsErrors.nascimento.length > 0) ? 'has-error' : ''}}">
+            <%= f.input :nascimento, as: :string, input_html: {"data-mascara" => "data", "ng-model" => "contactParams.nascimento"}, hint: "{{fieldsErrors.nascimento[0]}}" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+      <label for="contact_group_ids" class="select optional control-label">Adicionar aos Grupos</label>
+      <div class="form-group select optional">
+        <select class="select optional select2 form-control" ng-model="selectedGroup"
+          ng-options="group as group.descricao for group in groups | filter:filterAlreadyAdded"></select>
+      </div>
+
+      <div class="fixed-table-height-md">
+        <table class="table table-bordered table-hover table-striped">
+          <tbody class="contacts-table-body">
+            <tr ng-show="workingGroups" class="text-center">
+              <td>Criando grupo...</td>
+            </tr>
+            <tr ng-hide="selectedGroups.length > 0" class="text-center">
+              <td>Nenhum grupo selecionado</td>
+            </tr>
+            <tr ng-repeat="group in selectedGroups">
+              <td class="col-xs-11">{{group.descricao}}</td>
+              <td class="col-xs-1 remove-selected-group-button text-center" ng-click="removerGrupoDosSelecionados($index)">&times;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <%= link_to contacts_path, class: "btn btn-default col-sm-12" do %>
+        <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+        <strong>VOLTAR</strong>
+      <% end %>
+    </div>
+    <div class="col-sm-offset-4 col-sm-4">
+      <button type="submit" name="commit" class="btn btn-success col-sm-12">
+        <strong><%= (action_name == "new") ? "ADICIONAR" : "ATUALIZAR" %></strong>&nbsp;&nbsp;
+        <i class="icon-ok"></i>
+      </button>
+    </div>
+  </div>
+
+  <% if action_name == "edit" %>
+    <input type="hidden" name="contact[group_ids][]" ng-repeat="selectedGroup in selectedGroups" value="{{selectedGroup.id}}">
+  <% end %>
+</section>

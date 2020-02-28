@@ -1,0 +1,33 @@
+<%= simple_form_for(@license) do |f| %>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-10">
+        <%= f.input :descricao, autofocus: true %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :tipo, collection: License.tipos, label_method: ->(action_label) { t(action_label.first, scope: "tipo_licenca") },
+                      value_method: :first, include_blank: false %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :plan_id, collection: Plan.para_licenca, value_method: :id, label_method: :descricao %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :valor_unitario, as: :string, input_html: { value: @license.valor_unitario.reais_contabeis, "data-mascara" => "dinheiro" } %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :valor_sugerido, as: :string, input_html: { value: @license.valor_sugerido.reais_contabeis, "data-mascara" => "dinheiro" } %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit "", class: "hide" %>
+<% end %>

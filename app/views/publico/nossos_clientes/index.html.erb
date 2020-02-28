@@ -1,0 +1,36 @@
+<section class="nossos_clientes">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Nossos Clientes</h1>
+      </div>
+    </div>
+    <div class="row clientes border-none m-t-0">
+      <div class="col-xs-12">
+        <%= messages %>
+      </div>
+
+      <% @our_customers.each do |customer| %>
+        <div class="col-xs-3">
+          <div class="cliente">
+            <table>
+              <tr valign="middle">
+                <td align="center">
+                  <%=link_to customer.url, target: "_blank" do %>
+                  <%= image_tag customer.logo.url(:thumb), alt: customer.descricao, title: customer.descricao %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-right">
+        <%= paginate @our_customers, params: {controller: 'nossos_clientes', action: 'index'} %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<% content_for :actions, actions(:plan) %>
+<% content_for :angular_controller, "PlanController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>; canEdit=<%= can?(:update, Plan) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por Descrição", autofocus: true, placeholder: "Descrição",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="plans.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="plans">
+    <thead>
+      <tr>
+        <th ng-click="order('descricao')" class="{{orderClass('descricao')}}"><%= t('simple_form.labels.plan.descricao') %></th>
+        <th ng-click="order('tipo')" class="{{orderClass('tipo')}}"><%= t('simple_form.labels.plan.tipo') %></th>
+        <th ng-click="order('quantidade_sms')" class="{{orderClass('quantidade_sms')}}"><%= t('simple_form.labels.plan.quantidade_sms') %></th>
+        <th ng-click="order('valor_unitario')" class="{{orderClass('valor_unitario')}}"><%= t('simple_form.labels.plan.valor_unitario') %></th>
+        <th ng-click="order('valor_total')" class="{{orderClass('valor_total')}}"><%= t('simple_form.labels.plan.valor_total') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{plan.show_html_url}}" ng-repeat="plan in plans track by plan.id">
+        <td>{{plan.descricao}}</td>
+        <td>{{plan.tipo}}</td>
+        <td>{{plan.quantidade_sms}}</td>
+        <td>{{plan.valor_unitario}}</td>
+        <td>{{plan.valor_total}}</td>
+        <td class="text-right">
+          <a href="{{plan.edit_html_url}}" class="btn btn-success btn-xs" ng-if="canEdit">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="plans"
+    url="'<%= plans_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

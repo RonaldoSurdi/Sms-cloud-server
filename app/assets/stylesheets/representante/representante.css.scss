@@ -1,0 +1,40 @@
+/*
+ *= require theme-inocode
+ *= require font-awesome
+ *= require_tree .
+ *= require_self
+ */
+
+* {
+  outline: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.padding-top {
+  padding-top: 5px;
+}
+
+#bg-loader {
+  opacity: 0.6;
+  color: #FFF;
+  font-weight: bold;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030 !important;
+  background-color: black;
+
+  div {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    font-size: 15px;
+    margin-left: -74px;
+  }
+}

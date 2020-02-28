@@ -1,0 +1,29 @@
+<section class="dashboard bg-pattern">
+  <div class="container">
+    <br/><br/>
+    <%= messages %>
+    <div class="row">
+      <div class="col-xs-4">
+        <%=link_to compra_licencas_path, class: "function" do %>
+          <%=image_tag "fn-enviar-sms.png", alt: "Enviar SMS" %>
+          <p>COMPRAR/RENOVAR LICENÇAS</p>
+        <% end %>
+      </div>
+      <div class="col-xs-4">
+        <%=link_to compra_pacotes_path, class: "function" do %>
+          <%=image_tag "fn-comprar-pacotes.png", alt: "Comprar Pacotes" %>
+          <p>
+            COMPRAR PACOTE DE ENVIO DE SMS
+            <%= @customer.possui_licenca_atual? ? "ADICIONAL" : "AVULSO" %>
+          </p>
+        <% end %>
+      </div>
+      <div class="col-xs-4">
+        <%=link_to painel_index_path, class: "function" do %>
+          <%=image_tag "fn-importar-numeros.png", alt: "Importar Números" %>
+          <p>PAINEL</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

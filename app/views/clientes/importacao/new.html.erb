@@ -1,0 +1,159 @@
+<section id="importacao">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <br/>
+
+        <div class="box">
+          <div class="box-header">
+            <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+            <i class="icon-chevron-right"></i>&nbsp;
+
+            <span>Importação de Contatos</span>
+          </div>
+
+          <div class="box-content">
+            <div class="row">
+              <div class="col-xs-12">
+
+                <% if @erros %>
+                  <div id="mensagens">
+                    <div class="alert alert-danger alert-dismissable max-height-box">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                      <%= @erros.first[:erro_padrao] %>
+
+                      <% unless @erros.first[:erro_padrao] %>
+                        <p>
+                          <big>
+                            <strong>Foram encontrados os seguintes erros ao tentar importar:</strong>
+                          </big>
+                        </p>
+
+                        <br/>
+                        <ul>
+                          <% @erros.each do |linha| %>
+                            <li>
+                              <strong>Linha <%= linha.keys.first %></strong>
+                              <ul>
+                                <% linha.values.each do |erro| %>
+                                  <li><strong><%= t("simple_form.labels.contact.#{erro.keys.first}") %></strong>: <%= erro.values.first.first %></li>
+                                <% end %>
+                              </ul>
+                            </li>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
+              </div>
+            </div>
+            <%= form_tag(importacao_index_path, multipart: true) do |f| %>
+              <div class="form-inputs">
+                <div class="row sync-height-row">
+                  <div class="col-xs-4">
+                    <div class="box-content sync-height-boxes">
+                      <ul class="list-unstyled">
+                        <li>
+                          <big>
+                            <strong>Arquivo CSV</strong>
+                          </big>
+                        </li>
+                        <br/>
+                        <li>
+                          <label class="radio-inline">
+                            <input type="radio" name="tipo_arquivo" class="radio" value="<%= Contact::SEPARADORES_CSV[:virgula][:valor] %>" checked>
+                            Separação por <strong>Vírgula</strong>;
+                          </label>
+                        </li>
+                        <li>
+                          <label class="radio-inline">
+                            <input type="radio" name="tipo_arquivo" class="radio" value="<%= Contact::SEPARADORES_CSV[:ponto_e_virgula][:valor] %>">
+                            Separação por <strong>Ponto-e-Vírgula</strong>;
+                          </label>
+                        </li>
+                        <li>
+                          <label class="radio-inline">
+                            <input type="radio" name="tipo_arquivo" class="radio" value="<%= Contact::SEPARADORES_CSV[:tab][:valor] %>">
+                            Separação por <strong>Tabulação</strong>.
+                          </label>
+                        </li>
+                      </ul>
+                      <br/>
+
+                      <%= file_field_tag "arquivo", class: "control-label btn-md", required: true %>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div class="box-content sync-height-boxes">
+                      <ul class="list-unstyled">
+                        <li>
+                          <big>
+                            <strong>Layout Esperado do Arquivo</strong>
+                          </big>
+                        </li>
+                        <br/>
+                        <li>Nome <strong>(Obrigatório)</strong></li>
+                        <li>Sexo <strong>(Obrigatório) (M/F)</strong></li>
+                        <li>Celular <strong>(Obrigatório)</strong></li>
+                        <li>E-Mail</li>
+                        <li>Empresa</li>
+                        <li>Data de Nascimento <strong>(dd/mm/aaaa)</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div class="box-content sync-height-boxes">
+                      <ul class="list-unstyled">
+                        <li>
+                          <big>
+                            <strong>
+                              Codificação do Arquivo
+                              <abbr class="pull-right" title="Tradução do computador dos valores numéricos em caracteres visíveis, para diferentes alfabetos">?</abbr>
+                            </strong>
+                          </big>
+                        </li>
+                        <br/>
+
+                        <% @codificacoes.each_with_index do |codificacao, index| %>
+                          <li>
+                            <label class="radio-inline">
+                              <input type="radio" name="tipo_codificacao" class="radio" value="<%= index %>" <%= "checked" if index.zero? %>>
+                              <%= codificacao.name %>
+                            </label>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <%= link_to painel_index_path, class: "btn btn-default col-sm-12" do %>
+                      <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                      <strong>VOLTAR</strong>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-offset-4 col-sm-4">
+                    <button type="submit" class="btn btn-success col-sm-12">
+                      <strong>PROCESSAR ARQUIVO</strong>&nbsp;&nbsp;
+                      <i class="icon-ok"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

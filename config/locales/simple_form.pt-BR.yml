@@ -1,0 +1,132 @@
+pt-BR:
+  simple_form:
+    "yes": 'Sim'
+    "no": 'Não'
+    required:
+      text: 'requerido'
+      mark: '*'
+      html: '<abbr title="requerido">*</abbr>'
+    error_notification:
+      default_message: "Alguns erros foram encontrados:"
+    labels:
+      administrator: Administrador
+      representative: Representante
+      endereco: Endereço
+      customer: Cliente
+      our_customer: "Nosso Cliente"
+      message: "Envio de SMS"
+      message:
+        message: "Mensagem"
+        schedule: "Agendamento"
+      administrator:
+        name: "Nome"
+        email: "E-Mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha Atual"
+        last_sign_in_at: "Último Acesso"
+        roles: "Permissões"
+      representative:
+        nome_fantasia: "Nome Fantasia"
+        razao_social: "Razão Social"
+        cnpj: "CNPJ"
+        cnpj_formatado: "CNPJ"
+        inscricao_estadual: "Inscrição Estadual"
+        celular: "Celular"
+        celular_formatado: "Celular"
+        telefone: "Telefone"
+        telefone_formatado: "Telefone"
+        responsavel: "Nome do Responsável"
+        email: "E-Mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha Atual"
+        logo: "Logotipo"
+        created_at: Cadastrado em
+      endereco:
+        logradouro: "Logradouro"
+        bairro: "Bairro"
+        cidade: "Cidade"
+        uf: "Estado"
+        cep: "CEP"
+        cep_formatado: "CEP"
+        complemento: "Complemento"
+      role:
+        description: "Descrição"
+        actions:
+          edit: Alteração
+          update: Alteração
+          create: Criação
+          destroy: Exclusão
+          read: Leitura
+      customer:
+        nome: "Nome Completo / Nome Fantasia"
+        razao_social: "Razão Social"
+        celular: "Celular"
+        celular_formatado: "Celular"
+        telefone: "Telefone"
+        telefone_formatado: "Telefone"
+        email: "E-Mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha Atual"
+        tipo_pessoa: "Tipo de Pessoa"
+        representative_id: "Representante"
+        tipo_pessoa: "Tipo de Pessoa"
+        cpf_cnpj: "CPF/CNPJ"
+        cpf_cnpj_formatado: "CPF/CNPJ"
+        representative: "Representante do Cliente"
+      our_customer:
+        descricao: "Descrição"
+        url: "URL"
+        logo: "Logotipo"
+      plan:
+        descricao: "Descrição"
+        tipo: "Tipo de Pacote"
+        quantidade_sms: "SMS's / Ano"
+        valor_total: "Valor do Pacote"
+        valor_unitario: "Valor estimado / SMS"
+        licenses: Licenças
+      license:
+        descricao: "Descrição"
+        tipo: "Tipo de Licença"
+        plan_id: "Pacote de Envio de SMS's"
+        plan_descricao: "Descrição do Pacote"
+        valor_unitario: "Valor por Licença"
+        valor_sugerido: "Sugestão de Valor"
+      license_movement:
+        license_id: "Licença"
+        representative_id: "Representante"
+        licenca_descricao: "Descrição da Licença"
+        licenca_tipo: "Tipo de Licença"
+        licenca_valor_unitario: "Valor por Licença"
+        licenca_valor_sugerido: "Sugestão de Valor"
+        valor_venda_cliente: "Valor da Venda"
+        plano_quantidade_sms: "SMS's / Ano"
+        created_at: "Data da Compra"
+        confirmado_pagamento_em: "Confirmada em"
+        data_venda_cliente: "Data da Venda"
+        validade_inicio: "Início da Validade da Licença"
+        validade_fim: "Data de Expiração da Licença"
+      plan_movement:
+        plano_descricao: "Descrição do Pacote"
+        plano_tipo: "Tipo do Pacote"
+        plano_valor_total: "Valor do Pacote"
+        quantidade_sms: "Quantidade de SMS's"
+        validade_fim: "Válido até"
+        created_at: "Solicitada em"
+        confirmado_pagamento_em: "Confirmada em"
+      contact:
+        nome: "Nome"
+        sexo: "Sexo"
+        celular: "Celular"
+        empresa: "Empresa"
+        email: "E-Mail"
+        nascimento: "Data de Nascimento"
+        group_ids: "Grupos"
+      contact_group:
+        descricao: "Descrição"
+        observacao: "Observação"
+      configuration:
+        send_birthdays: Enviar automaticamente em aniversários?
+        text_birthdays: Mensagem de envio para contatos aniversariantes

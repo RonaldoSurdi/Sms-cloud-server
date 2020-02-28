@@ -1,0 +1,16 @@
+<%%= actions(:<%= singular_table_name %>) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%%= messages %>
+
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+        <%%= show_input_tag(@<%= singular_table_name %>, :<%= attribute.name %>) %>
+<% end -%>
+
+      </div>
+    </div>
+  </div>
+</div>

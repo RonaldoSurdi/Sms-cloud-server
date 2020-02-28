@@ -1,0 +1,64 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span><%= raw title(Representative) %></span>
+          </h1>
+
+          <%= link_to representatives_path, class: "btn btn-white pull-right btn-action spacing" do %>
+            <i class="icon-arrow-left"></i><br>Voltar
+          <% end  if show_action(Representative, :back) %>
+
+          <% unless @representative.cadastro_aprovado %>
+            <%= link_to edit_representative_path(@representative), class: "btn pull-right btn-action btn-danger" do %>
+              <i class="icon-flag-alt"></i><br>Reprovar Cadastro
+            <% end if can?(:destroy, Representative) %>
+
+            <%= link_to representative_path(@representative, {representative: {cadastro_aprovado: "1"}}), class: "btn pull-right btn-action btn-success",
+                                            method: :patch, data: { confirm: "Você tem certeza que deseja aprovar este cadastro?" } do %>
+              <i class="icon-flag-alt"></i><br>Aprovar Cadastro
+            <% end if can?(:update, Representative) %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <% [:nome_fantasia, :razao_social, :cnpj_formatado, :telefone_formatado, :celular_formatado, :inscricao_estadual, :responsavel, :email].each do |attribute| %>
+          <%= show_input_tag(@representative, attribute) %>
+        <% end %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.representative.created_at") %></label>
+          <div class="col-md-10">
+            <label class="form-control auto-height"><%= l(@representative.created_at, format: :long) %></label>
+          </div>
+        </div>
+
+        <% [:cep_formatado, :cidade, :uf, :logradouro, :bairro, :complemento].each do |attribute| %>
+          <%= show_input_tag(@representative.endereco, attribute) %>
+        <% end %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.representative.logo") %></label>
+          <div class="col-md-2">
+            <label class="form-control auto-height text-center">
+              <%= @representative.logo.blank? ? "Não possui logotipo cadastrado" : image_tag(@representative.logo.url(:thumb)) %>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

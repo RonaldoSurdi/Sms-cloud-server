@@ -1,0 +1,142 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span><%= raw title(Customer) %></span>
+          </h1>
+
+          <%= link_to customers_path, class: "btn btn-white pull-right btn-action spacing" do %>
+            <i class="icon-arrow-left"></i><br>Voltar
+          <% end if show_action(Customer, :back) %>
+
+          <% if false #não é necessário do botão bloquear ainda %>
+            <%= link_to customer_path(@customer, {customer: {status: :bloqueado}}), class: "btn pull-right btn-action btn-warning",
+                                            method: :patch, data: { confirm: "Você tem certeza que deseja bloquear este cliente?" } do %>
+              <i class="icon-lock"></i><br>Bloquear Cliente
+            <% end if can?(:update, Customer) && @customer.ok? %>
+          <% end %>
+
+          <%= link_to customer_path(@customer, {customer: {status: :ok}}), class: "btn pull-right btn-action btn-success",
+                                          method: :patch, data: { confirm: "Você tem certeza que deseja desbloquear este cliente?" } do %>
+            <i class="icon-ok"></i><br>Desbloquear Cliente
+          <% end if can?(:update, Customer) && @customer.bloqueado? %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#customer" data-toggle="tab">
+                <i class="icon-user"></i>
+                Cliente
+              </a>
+            </li>
+            <li>
+              <a href="#license_movements_history" data-toggle="tab">
+                <i class="icon-list-ul"></i>
+                Histórico de Licenças
+              </a>
+            </li>
+            <li>
+              <a href="#plan_movements_history" data-toggle="tab">
+                <i class="icon-list"></i>
+                Histórico de Pacotes
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="customer" class="tab-pane active">
+              <div class="row">
+                <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.customer.representative") %></label>
+                <div class="col-md-10">
+                  <a href="<%= representative_path(@customer.representative.id) %>">
+                    <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                      <%= @customer.representative.nome_fantasia %>
+                    </label>
+                  </a>
+                </div>
+              </div>
+              <br/>
+
+              <%= show_input_tag(@customer, :tipo_pessoa, t(@customer.tipo_pessoa, scope: :tipo_pessoa)) %>
+
+              <% [:nome, :razao_social, :cpf_cnpj_formatado, :telefone_formatado, :celular_formatado, :email].each do |attribute| %>
+                <%= show_input_tag(@customer, attribute) %>
+              <% end %>
+
+              <% [:cep_formatado, :cidade, :uf, :logradouro, :bairro, :complemento].each do |attribute| %>
+                <%= show_input_tag(@customer.endereco, attribute) %>
+              <% end %>
+            </div>
+
+            <div id="license_movements_history" class="tab-pane">
+              <%= render partial: "layouts/shared/historico_licencas", locals: { customer: @customer, current_license_id: @current_license_id } %>
+            </div>
+
+            <div id="plan_movements_history" class="tab-pane">
+              <% if @plan_movements.any? %>
+                <div class="accordion accordion-dark panel-group" id="history-accordion">
+                  <% @plan_movements.each_with_index do |plan, i| %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <a class="accordion-toggle" data-parent="#history-accordion" data-toggle="collapse" href="<%= "##{plan.id}-history-accordion" %>">
+                          <%= plan.plano_descricao %>
+                        </a>
+                      </div>
+                      <div class="panel-collapse collapse <%= "in" if (i == 0) %>" id="<%= "#{plan.id}-history-accordion" %>">
+                        <div class="panel-body">
+
+                          <%= show_input_tag(plan, :plano_tipo, t(plan.plano_tipo, scope: "tipo_plano")) %>
+                          <%= show_input_tag(plan, :validade_fim, plan.validade_fim.to_s_br) %>
+                          <%= show_input_tag(plan, :quantidade_sms, "#{plan.quantidade_sms} SMS's") %>
+                          <%= show_input_tag(plan, :plano_valor_total, plan.plano_valor_total.reais_contabeis) %>
+
+                          <div class="row">
+                            <div class="col-md-offset-2 col-md-2">
+                              <br/>
+                              <a href="<%= plan_movement_path(plan.id) %>"
+                                  class="btn btn-default">
+                                <i class="icon-eye-open"></i>&nbsp;
+                                Ver Pacote
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div id="mensagens">
+                      <br/>
+                      <%= content_tag :div, class: "alert alert-info" do %>
+                        <i class="icon-info"></i>&nbsp;&nbsp;
+                        Este cliente ainda não adquiriu nenhuma pacote de SMS's.
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

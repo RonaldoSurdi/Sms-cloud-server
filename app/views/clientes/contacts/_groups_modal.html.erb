@@ -1,0 +1,30 @@
+<div class="modal fade" id="<%= "#{action_name}_#{controller_name.singularize}_modal" %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">Criar Grupo</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-inputs">
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :descricao, autofocus: true, input_html: {"ng-model" => "contactGroupParams.descricao"} %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :observacao, as: :text,
+                  input_html: {"data-mascara" => "telefone", "maxlength" => 255, "ng-model" => "contactGroupParams.observacao", rows: 5} %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Criar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span>Detalhes da Venda</span>
+          </h1>
+
+          <%= link_to plan_movements_path, class: "btn btn-white pull-right btn-action spacing" do %>
+            <i class="icon-arrow-left"></i><br>Voltar
+          <% end %>
+
+          <% unless @plan_movement.confirmada? %>
+            <%= link_to plan_movement_path(@plan_movement), method: :delete, data: {confirm: "Confirma exclusão?"}, class: "btn btn-danger pull-right btn-action spacing" do %>
+              <i class="icon-trash"></i><br>Excluir
+            <% end if can?(:destroy, PlanMovement) %>
+
+            <%= link_to plan_movement_path(@plan_movement), class: "btn pull-right btn-action btn-success",
+                                            method: :patch, data: { confirm: "Você tem certeza que deseja confirmar essa venda?" } do %>
+              <i class="icon-ok"></i><br>Confirmar Pagamento
+            <% end if can?(:update, PlanMovement) %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show">Cliente</label>
+          <div class="col-md-10">
+            <a href="<%= customer_path(@plan_movement.customer) %>">
+              <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                <%= @plan_movement.customer.nome %>
+              </label>
+            </a>
+          </div>
+        </div>
+        <br/>
+
+        <%= show_input_tag(@plan_movement, :plano_descricao) %>
+        <%= show_input_tag(@plan_movement, :plano_tipo, t(@plan_movement.plano_tipo, scope: "tipo_plano")) %>
+        <%= show_input_tag(@plan_movement, :quantidade_sms, "#{@plan_movement.quantidade_sms} SMS's") %>
+        <%= show_input_tag(@plan_movement, :plano_valor_total, @plan_movement.plano_valor_total.real_contabil) %>
+
+        <% [:created_at, :confirmado_pagamento_em].each do |attribute| %>
+          <%= show_input_tag(@plan_movement, attribute, @plan_movement.try(attribute).try(:to_s_br) || "Não foi confirmado o pagamento ainda.") %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

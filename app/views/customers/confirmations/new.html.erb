@@ -1,0 +1,32 @@
+<section class="reenviar-email-cliente bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Reenviar instruções de confirmação de email</h3>
+
+        <hr/>
+
+        <% if resource.errors.full_messages.present? %>
+          <div class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <%= raw resource.errors.full_messages.join("<br>") %>
+          </div>
+        <% end %>
+
+        <%= messages %>
+
+        <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+
+          <%= f.input :email, required: true, input_html: { autofocus: true } %>
+
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+              <%= f.submit "Reenviar confirmação", class: "btn btn-default col-sm-12" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

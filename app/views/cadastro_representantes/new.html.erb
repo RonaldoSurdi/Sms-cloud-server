@@ -1,0 +1,136 @@
+<section class="seja-representante bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-5">
+        <h2>Por que ser um <br /> representante?</h2>
+        <p>A SENDMY está procurando parceiros dinâmicos com perfil empreendedor para atender médias e grandes empresas no segmento de soluções em comunicação.</p>
+        <p>Nosso representante encontra:</p>
+        <ul>
+          <li>Alta rentabilidade;</li>
+          <li>Possibilidade de treinamento;</li>
+          <li>Ofertas diferenciadas;</li>
+          <li>Campanhas e incentivos.</li>
+        </ul>
+        <p>Se você é um empreendedor ou empresário em busca de novos negócios e quer trabalhar em nossa empresa preencha o cadastro, não perca essa oportunidade!</p>
+        <hr/>
+        <p>
+          <strong>Se cadastrou e não recebeu o e-mail de confirmação?</strong>
+          <br/>
+          <%= link_to "Clique aqui para reenviar o e-mail.", new_representative_confirmation_path %>
+        </p>
+        <p>
+          <strong>Se cadastrou e não sabe aonde deve acessar sua conta?</strong>
+          <br/>
+          <%= link_to "Clique aqui para acessar o painel do representante.", new_representative_session_path %>
+        </p>
+      </div>
+      <div class="col-xs-7">
+        <h3 class="text-center">Preencha o formário abaixo.</h3>
+        <br/>
+
+        <%= messages %>
+
+        <%= simple_form_for(@representante, url: public_representatives_path, input_html: { multipart: true }) do |f| %>
+
+          <h4 class="azul-sendmy">Informações da empresa</h4>
+          <hr>
+          <div class="form-inputs">
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :nome_fantasia, input_html: { autofocus: true } %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :razao_social %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :cnpj, input_html: {"data-mascara" => "cnpj"} %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :inscricao_estadual, required: false %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :logo, as: :file %>
+              </div>
+            </div>
+
+            <h4 class="azul-sendmy">Informações do responsável</h4>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :responsavel %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :email, required: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :telefone, input_html: {"data-mascara" => "telefone"} %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :celular, required: false, input_html: {"data-mascara" => "telefone"} %>
+              </div>
+            </div>
+
+            <h4 class="azul-sendmy">Localização da empresa</h4>
+            <hr>
+            <%= f.simple_fields_for :endereco do |ff| %>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :cep, input_html: {"data-mascara" => "cep"}, hint: raw('<a href="http://www.buscacep.correios.com.br/" target="_blank" tabindex="-1">Não sabe o seu cep?</a>') %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :uf, collection: UF.all.collect { |k,v| [v,k] }, required: true %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :cidade, required: true %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :logradouro %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :bairro %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :complemento, required: false %>
+                </div>
+              </div>
+
+            <% end %>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Cadastrar", class: "btn btn-default col-md-12" %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

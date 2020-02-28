@@ -1,0 +1,166 @@
+<% content_for :angular_controller, 'ProfileController' %>
+
+<div class="row" id="affix-actions" ng-init="address = <%= serialize_json_angular @representative.endereco %>">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span>
+              Perfil
+              <i class='icon-angle-right'></i>
+              Edição
+            </span>
+          </h1>
+
+          <%= link_to representative_root_path, class: "btn btn-warning pull-right btn-action" do %>
+            <i class="icon-remove"></i><br>Cancelar
+          <% end %>
+
+          <%= link_to "#", class: "btn pull-right btn-action btn-primary", data: {"form-submit" => ".simple_form"} do %>
+            <i class="icon-save"></i><br>Gravar
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row form">
+  <div class="col-md-12">
+    <div class="box">
+      <%= messages %>
+      <%= simple_form_for(@representative, url: profile_representative_path, method: :patch) do |f| %>
+
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <br>
+          <legend>Informações da Empresa</legend>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :nome_fantasia, input_html: {autofocus: true} %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :razao_social %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :cnpj, disabled: true, input_html: { "data-mascara" => "cnpj" } %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :inscricao_estadual %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :logo, as: :file %>
+            </div>
+          </div>
+
+          <% if @representative.logo.present? %>
+            <div class="row">
+              <div class="col-md-12">
+                <%= image_tag(@representative.logo.url(:thumb)) %>
+              </div>
+            </div>
+            <br/>
+          <% end %>
+
+          <legend>Informações do Responsável | Acesso</legend>
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :responsavel %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :email, required: true %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :telefone, input_html: { "data-mascara" => "telefone" } %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :celular, input_html: { "data-mascara" => "telefone" } %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.input :current_password %>
+            </div>
+            <div class="col-md-4">
+              <%= f.input :password, placeholder: "Deixe este campo em branco para manter a senha anterior", required: false %>
+            </div>
+            <div class="col-md-4">
+              <%= f.input :password_confirmation, required: false %>
+            </div>
+          </div>
+
+          <legend>Informações de Localização</legend>
+
+          <%= f.simple_fields_for :endereco do |ff| %>
+            <%= ff.hidden_field :id %>
+
+            <div class="row">
+              <div class="col-md-5">
+                <%= ff.input :cep,
+                        hint: raw('<a href="http://www.buscacep.correios.com.br/" target="_blank" tabindex="-1">Não sabe o seu cep?</a>'),
+                        input_html: {
+                          "ng-model" => "address.cep",
+                          "ng-change" => "loadCepInfo(address.cep)",
+                          "ng-disabled" => "cepSearch.loading",
+                          "ui-br-cep-mask" => ""
+                        } %>
+              </div>
+              <div class="col-md-5">
+                <%= ff.input :cidade, input_html: {
+                  "ng-model" => "address.cidade",
+                  "ng-disabled" => "!cepSearch.error"
+                } %>
+              </div>
+              <div class="col-md-2">
+                <%= ff.input :uf,
+                      collection: ActionView::Helpers::FormOptionsHelper::ESTADOS_BRASILEIROS,
+                      label_method: :last,
+                      input_html: {
+                        "ng-model" => "address.uf",
+                        "ng-disabled" => "!cepSearch.error"
+                      } %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= ff.input :bairro, input_html: { "ng-model" => "address.bairro" } %>
+              </div>
+              <div class="col-md-6">
+                <%= ff.input :logradouro, input_html: { "ng-model" => "address.logradouro" } %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= ff.input :complemento %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+
+        <%= f.submit "", class: "hide" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="bg-loader" class="modal-backdrop fade in" ng-show="cepSearch.loading">
+  <div>
+  <i class="icon-spinner icon-spin"></i>&nbsp;
+    Aguarde, carregando...
+  </div>
+</div>

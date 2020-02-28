@@ -1,0 +1,12 @@
+/*
+ *= require theme-inocode
+ *= require font-awesome
+ *= require_tree .
+ *= require_self
+ */
+
+label.label-check {
+  &, input.checkbox_confirmar {
+    cursor: pointer;
+  }
+}

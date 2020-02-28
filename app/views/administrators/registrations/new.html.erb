@@ -1,0 +1,16 @@
+<div id="usuarios">
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <ol class="breadcrumb">
+        <li><a href="<%=root_path%>"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active"><a href="<%= new_usuario_registration_path %>">Cadastro de Usuário</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <%= render "usuarios/form_field" %>
+</section>
+</div>
+

@@ -1,0 +1,176 @@
+<% content_for :angular_controller, "ContactController" %>
+
+<div class="container index_contacts">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <div class="col-xs-9">
+            <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+            <i class="icon-chevron-right"></i>&nbsp;
+
+            <span>Contatos</span>&nbsp;&nbsp;&nbsp;
+            <i class="icon-spinner icon-spin" ng-show="working"></i>
+          </div>
+        </div>
+
+        <div class="box-content">
+
+          <div class="row">
+            <div class="col-xs-7">
+              <%= link_to new_contact_path, class: "btn btn-success" do %>
+                <i class="icon-plus"></i>&nbsp;Novo Contato
+              <% end %>
+
+              <%= link_to contact_groups_path, class: "btn btn-info" do %>
+                <i class="icon-group"></i>&nbsp;Grupos
+              <% end %>
+            </div>
+
+            <div class="col-xs-5">
+              <div class="form-group select optional">
+                <%= select_tag "contact_groups[ids]", options_from_collection_for_select(@groups, :id, :descricao), include_blank: true,
+                      class: "select optional select2 form-control", "ng-model" => "filterGroup" %>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group input optional">
+                <input type="text" class="form-control" placeholder="Filtrar por Nome/Empresa/Celular..." ng-model="filterString" autofocus>
+
+                <div class="padding-top">
+                  <span ng-model="filteredContactsCount" class="text-muted">
+                    <strong>{{filteredContactsCount}}</strong>
+                    {{(filteredContactsCount == 1) ? "Registro Listado" : "Registros Listados"}}
+                  </span>
+                  <span id="index_mensagem" class="pull-right label {{mensagem.label}}" ng-model="canShowMesssage" ng-show="canShowMesssage"
+                        ng-init="mensagem.texto = <%= (alert || notice) ? ("\'" + (alert || notice) + "\'; mostrarMensagem();") : "\'\';" %>
+                                mensagem.label = <%= alert ? "\'label-danger\'" : "\'label-success\'" %>">
+                    {{mensagem.texto}}
+                  </span>
+                  <br/>
+                </div>
+
+              </div>
+              <div class="clearfix slider" id="slider">
+                <div class="slider-content">
+                  <ul class="list-unstyled">
+                    <% @alphabet.each do |word| %>
+                      <li class="<%= "selected" if word == "A" %>" id="<%= word.downcase %>">
+                        <a class="title" name="<%= word.downcase %>"><%= (word == Customer::SYMBOL_FOR_NO_LETTER) ? "#" : word %></a>
+                        <ul class="list-unstyled">
+
+                            <li ng-repeat="contact in filteredContacts['<%= word %>'] = (contacts['<%= word %>'] | filter:{groups_ids: filterGroup} | filter:filterString)"
+                                ng-click="abrirModalContatos(contact.id)">
+                              <a href="#">
+                                <span>{{contact.nome}}&nbsp;&nbsp;&nbsp;</span>
+                                <span class="text-muted" ng-show="contact.empresa != '' && contact.empresa != undefined">
+                                  &nbsp;&nbsp;&nbsp;
+                                  {{contact.empresa}}
+                                </span>
+                                <span class="pull-right">{{formatarTelefone(contact.celular)}}&nbsp;&nbsp;&nbsp;</span>
+                              </a>
+                            </li>
+                        </ul>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <br/>
+            <div class="col-xs-4">
+              <%= link_to painel_index_path, class: "btn btn-default col-xs-12" do %>
+                <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                <strong>VOLTAR</strong>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="<%= "#{action_name}_#{controller_name}_modal" %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          <h4 class="modal-title">
+            Informações do Contato&nbsp;&nbsp;&nbsp;
+            <i class="icon-spinner icon-spin" ng-show="workingModal"></i>
+          </h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.nome") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{selectedContact.nome}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.sexo") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{formatarTitulo(selectedContact.sexo)}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.celular") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{formatarTelefone(selectedContact.celular)}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.email") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{selectedContact.email}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.empresa") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{selectedContact.empresa}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.contact.nascimento") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{formatarData(selectedContact.nascimento)}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show">Grupos</label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{selectedContactGroups.join(', ') || "Não está em nenhum grupo"}}</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn btn-success" ng-model="selectedContact" ng-href="<%= contacts_path %>/{{selectedContact.id}}/edit">Editar</a>
+          <a class="btn btn-danger" ng-model="selectedContact" ng-click="excluirContato(selectedContact.id)">
+            Excluir
+          </button>
+          <a class="btn btn-default" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

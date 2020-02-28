@@ -1,0 +1,65 @@
+<% content_for :actions, actions(:representative) %>
+<% content_for :angular_controller, "RepresentativeController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>; canEdit=<%= can?(:update, Representative) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por algum dos campos da tabela", autofocus: true, placeholder: "Pesquisar",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="representatives.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="representatives">
+    <thead>
+      <tr>
+        <th ng-click="order('nome_fantasia')" class="{{orderClass('nome_fantasia')}}">Nome Fantasia</th>
+        <th ng-click="order('razao_social')" class="{{orderClass('razao_social')}}">Razão Social</th>
+        <th ng-click="order('cnpj')" class="{{orderClass('cnpj')}}">CPNJ</th>
+        <th ng-click="order('responsavel')" class="{{orderClass('responsavel')}}">Responsável</th>
+        <th ng-click="order('telefone')" class="{{orderClass('telefone')}}">Telefone</th>
+        <th ng-click="order('email')" class="{{orderClass('email')}}">E-Mail</th>
+        <th ng-click="order('cadastro_aprovado')" class="{{orderClass('cadastro_aprovado')}} text-center" title="Situação dos cadastros">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{representative.show_html_url}}" ng-repeat="representative in representatives track by representative.id">
+        <td>{{representative.nome_fantasia}}</td>
+        <td>{{representative.razao_social}}</td>
+        <td>{{representative.cnpj_formatado}}</td>
+        <td>{{representative.responsavel}}</td>
+        <td>{{representative.telefone_formatado}}</td>
+        <td>{{representative.email}}</td>
+        <td class="text-center" title="{{representative.cadastro_aprovado['title']}}"><i class="{{representative.cadastro_aprovado['classes']}}"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="representatives"
+    url="'<%= representatives_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

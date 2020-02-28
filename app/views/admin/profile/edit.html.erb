@@ -1,0 +1,58 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span>Perfil > Edição</span>
+          </h1>
+
+          <%= link_to administrator_root_path, class: "btn btn-warning pull-right btn-action" do %>
+            <i class="icon-remove"></i><br>Cancelar
+          <% end %>
+
+          <%= link_to "#", class: "btn pull-right btn-action btn-primary", data: {"form-submit" => ".simple_form"} do %>
+            <i class="icon-save"></i><br>Gravar
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row form">
+  <div class="col-md-12">
+    <div class="box">
+      <%= messages %>
+      <%= simple_form_for(@administrator, url: profile_administrator_path, method: :patch) do |f| %>
+
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :name, input_html: {autofocus: true}, required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :email, required: true %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.input :current_password, required: false %>
+            </div>
+            <div class="col-md-4">
+              <%= f.input :password, placeholder: "Deixe este campo em branco para manter a senha anterior", required: false %>
+            </div>
+            <div class="col-md-4">
+              <%= f.input :password_confirmation, required: false %>
+            </div>
+          </div>
+
+        <%= f.submit "", class: "hide" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

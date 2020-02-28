@@ -1,0 +1,61 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left"><span>Dashboard</span></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row grid">
+  <div class="col-xs-12">
+    <%= messages %>
+    <div class="row" ng-controller="HomeMessagesController" ng-init="init(<%= serialize_json_angular @contagem_mensagens %>)">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header muted-background">
+            <div class="title">
+              <i class="icon-envelope"></i>&nbsp;
+              Mensagens&nbsp;&nbsp;&nbsp;
+              <i class="icon-spinner icon-spin" ng-show="carregandoMensagens"></i>
+            </div>
+            <div class="actions">
+              <a class="btn box-collapse btn-xs btn-link" href="#"><i></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <form class="form-horizontal">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label class="col-sm-8 col-xs-3 control-label text-right">Período</label>
+                        <div class="col-sm-4 col-xs-9">
+                          <select ng-model="periodoSelecionado" ng-options="periodo.valor as periodo.texto for periodo in periodos" ng-change="buscarContagemDeMensagens(periodo.valor)" class="form-control"></select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box-content">
+                  <div id="mensagens-chart" style="height: 250px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

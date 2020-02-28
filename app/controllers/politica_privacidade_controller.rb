@@ -1,0 +1,2 @@
+class PoliticaPrivacidadeController < ApplicationController
+end

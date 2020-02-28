@@ -1,0 +1,59 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <div class="pull-left">
+            <h1 class="padding-top">
+              <span>Comprar Licenças</span>
+            </h1>
+            <h3 class="padding-top">
+              <span>Valor:&nbsp;</span><span data-total></span>
+            </h3>
+          </div>
+
+          <%= link_to representative_license_movements_path, class: "btn btn-warning pull-right btn-action" do %>
+            <i class="icon-remove"></i><br>Cancelar
+          <% end %>
+
+          <%= link_to "#", class: "btn pull-right btn-action btn-primary", data: {"form-submit" => "[action='#{representative_license_movements_path}']"} do %>
+            <i class="icon-shopping-cart"></i><br>Comprar
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form">
+  <div class="col-md-12">
+    <div class="box">
+      <%= messages %>
+
+      <%= form_tag(representative_license_movements_path) do %>
+
+        <div class="form-inputs">
+
+          <div class="pricing-tables">
+            <br/>
+            <% License.tipos.each do |tipo| %>
+              <% unless licenses_tipo(tipo.first).size.zero? %>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <legend class="text-center padding-top"><%= t(tipo.first, scope: "tipo_licenca_pluralize") %></legend>
+                  </div>
+                </div>
+                <div class="row">
+                  <%= render partial: "license", collection: licenses_tipo(tipo.first) %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <%= submit_tag "", class: "hide", data: { confirm: "Você tem certeza?" } %>
+      <% end %>
+    </div>
+  </div>
+</div>

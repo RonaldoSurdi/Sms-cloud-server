@@ -1,0 +1,32 @@
+<%= actions(:plan) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <%= show_input_tag(@plan, :descricao) %>
+        <%= show_input_tag(@plan, :tipo, t(@plan.tipo, scope: "tipo_plano")) %>
+        <%= show_input_tag(@plan, :quantidade_sms, @plan.quantidade_sms.contabil.gsub(/,00/, "")) %>
+        <%= show_input_tag(@plan, :valor_unitario, @plan.valor_unitario) %>
+        <%= show_input_tag(@plan, :valor_total, @plan.valor_total.real_contabil) %>
+        <%= show_input_tag(@plan, :valor_total, @plan.valor_total.real_contabil) %>
+
+        <% if @plan.licenca? %>
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.plan.licenses") %></label>
+            <div class="col-md-10">
+              <label class="form-control auto-height">
+                <% @plan.licenses.each_with_index do |license, i| %>
+                  <%= link_to license.descricao, license_path(license) %><%= ',' unless (@plan.licenses.length - 1) == i %>
+                <% end %>
+              </label>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

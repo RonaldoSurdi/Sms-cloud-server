@@ -1,0 +1,110 @@
+<%= content_for :angular_controller, "PainelPrincipalController" %>
+
+<section class="dashboard bg-pattern" ng-init="saldo = <%= current_customer.saldo_sms %>;
+                                                dash.transacao = <%= serialize_json_angular @transacao %>;
+                                                dash.mensagem = <%= "\'#{@mensagem_texto.try(:truncate, 40)}\'" %>;
+                                                init();">
+  <div class="container">
+  {{teste}}
+    <%= messages %>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="row">
+          <%=link_to new_envio_path, class: "function" do %>
+            <%=image_tag "fn-enviar-sms.png", alt: "Enviar SMS" %>
+            <p>ENVIAR SMS</p>
+          <% end %>
+        </div>
+        <div class="row">
+          <%=link_to new_importacao_path, class: "function" do %>
+            <%=image_tag "fn-importar-numeros.png", alt: "Importar Números" %>
+            <p>IMPORTAR CONTATOS</p>
+          <% end %>
+        </div>
+        <div class="row">
+          <%=link_to painel_opcoes_index_path, class: "function" do %>
+            <%=image_tag "fn-comprar-pacotes.png", alt: "Comprar Pacotes" %>
+            <p>
+              COMPRAR PACOTE DE ENVIO DE SMS
+              <%= current_customer.possui_licenca_atual? ? "ADICIONAL" : "AVULSO" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-4 link">
+        <div class="row">
+          <a class="function" <%= raw("href=\"#{relatorio_path(@transacao.grupo)}\"") if @transacao.present? %>>
+            <span>STATUS DO ENVIO</span>
+            <div id="progressbar-circle"></div>
+            <strong class="progressbar-title">
+              {{dash.transacao.grupo ? "Transação #" + dash.transacao.grupo : "Nenhum SMS sendo enviado"}}
+            </strong>
+            <br/>
+            <span ng-show="dash.transacao">
+              {{dash.mensagem}}
+              <br/>
+              <strong>
+                Enviando {{dash.transacao.quantidade_enviado || 0}} de {{dash.transacao.quantidade_total}} SMS's...
+              </strong>
+            </span>
+          </a>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="smartphone">
+              <div class="smartphone-container">
+                <div class="text-center">
+                  <label class="smartphone-title">{{mensagem.titulo}}</label>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <input type="text" name="mensagem_numero" id="mensagem_numero" placeholder="Digite o número de destino..."
+                          ng-model="mensagem.numero" ng-disabled="mensagem.desabilitarCampos" ui-br-phone-number>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <textarea name="mensagem_texto" id="mensagem_texto" maxlength="160" placeholder="Digite sua mensagem..."
+                            ng-model="mensagem.texto" ng-disabled="mensagem.desabilitarCampos">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="smartphone-footer">
+                <button type="submit" ng-disabled="mensagem.desabilitarCampos" ng-click="enviarMensagem()"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 link">
+        <div class="row">
+          <%=link_to contacts_path, class: "function" do %>
+            <%=image_tag "fn-cadastro-clientes.png", alt: "Contatos" %>
+            <p>GRUPOS E CONTATOS</p>
+          <% end %>
+        </div>
+        <div class="row">
+          <%=link_to relatorios_path, class: "function" do %>
+            <%=image_tag "fn-relatorios.png", alt: "Relatórios" %>
+            <p>RELATÓRIOS</p>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <%=image_tag "sendmy_inteligent_sms_center.png", title: "SendMy Inteligent SMS Center", alt: "SendMy Inteligent SMS Center" %>
+          </div>
+        </div>
+        <div class="row envio-ajuda-box">
+          <div class="col-xs-12">
+            <p class="text-painel-envio-rapido">
+              <span>ENVIAR SMS</span><br/>
+              CLIQUE NO BOTÃO DE ENVIO DO CELULAR PARA ENVIAR A SUA MENSAGEM
+              <div class="line"></div>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,106 @@
+<% content_for :angular_controller, "RelatorioController" %>
+
+<section ng-init="<%= @mensagens_agrupadas.length > 0 %> ? init() : ''">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header muted-background">
+            <div class="col-xs-12">
+              <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+              <i class="icon-chevron-right"></i>&nbsp;
+
+              <span>Relatórios</span>
+            </div>
+          </div>
+
+          <div class="box-content">
+
+            <div class="row">
+              <div class="col-xs-6">
+                <h4><li>Relatório de Transações de Envio</li></h4>
+              </div>
+              <div class="col-xs-6 text-right">
+                <form action="<%= relatorios_path %>" method="get">
+                  <%= select_date @month_filter ? (@month_filter + "/" + @year_filter).to_date : Date.today,
+                        { start_year: 2015, discard_day: true }, { class: "form-control" } %>
+                  <button type="submit" class="btn btn-default">Filtrar</button>
+                </form>
+              </div>
+            </div>
+            <br/>
+
+            <% unless @mensagens_agrupadas.length > 0 %>
+              <p class="alert alert-info">
+                <i class="icon-info-sign"></i>&nbsp;
+                Nenhuma transação de saldo efetuada na data selecionada.
+              </p>
+            <% else %>
+              <div class="max-height-box">
+                <table class="table table-hover table-striped text-center main-table">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Transação</th>
+                      <th class="text-center">Data de Criação</th>
+                      <th class="text-center">Pendentes</th>
+                      <th class="text-center">Enviando</th>
+                      <th class="text-center">Sucesso</th>
+                      <th class="text-center">Com Erro</th>
+                      <th class="text-center">Total</th>
+                      <th class="text-center">Progresso do Envio</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @mensagens_agrupadas.each do |mensagem_agrupada| %>
+                      <tr data-href="<%= relatorio_path(mensagem_agrupada.grupo) %>">
+                        <td>#<%= mensagem_agrupada.grupo %></td>
+                        <td><%= mensagem_agrupada.data_criacao.in_time_zone.to_s_br %></td>
+                        <td><%= mensagem_agrupada.quantidade_pendente %></td>
+                        <td><%= mensagem_agrupada.quantidade_enviando %></td>
+                        <td><%= mensagem_agrupada.quantidade_sucesso %></td>
+                        <td><%= mensagem_agrupada.quantidade_erro %></td>
+                        <td><%= mensagem_agrupada.quantidade_total %></td>
+                        <td>
+                          <div class="progress text-center">
+                            <div role="progressbar" class="progress-bar progress-bar-purple"
+                                  style="width: <%= percent = mensagem_agrupada.porcentagem_enviados %>%"></div>
+                            <span class="percent-display"><%= (percent == 100) ? percent : raw("&nbsp;#{percent}") %>%</span>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 text-muted text-right">
+                  <span>
+                    <strong><%= @mensagens_agrupadas.length %></strong>
+                    <%= (@mensagens_agrupadas.length == 1 ? "Registro Listado" : "Registros Listados") %>
+                  </span>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="row align-end">
+              <div class="col-xs-4">
+                <%= link_to painel_index_path, class: "btn btn-default col-xs-12" do %>
+                  <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                  <strong>VOLTAR</strong>
+                <% end %>
+              </div>
+
+              <% if @mensagens_agrupadas.length > 0 %>
+                <div class="col-xs-8 text-right">
+                  Essa página será recarregada em <strong>{{contador}}</strong> segundos.
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

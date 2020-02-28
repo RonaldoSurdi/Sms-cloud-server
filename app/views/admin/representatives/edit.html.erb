@@ -1,0 +1,50 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span><%= raw title(Representative) %></span>
+          </h1>
+
+          <%= link_to @representative, class: "btn btn-warning pull-right btn-action spacing" do %>
+            <i class="icon-remove"></i><br>Cancelar
+          <% end  if show_action(Representative, :cancel) %>
+
+          <%= link_to "#", data: {"form-submit" => "[action=\"#{representative_path(@representative)}\"]"}, class: "btn btn-danger pull-right btn-action" do %>
+            <i class="icon-trash"></i><br>Rejeitar Cadastro
+          <% end if can?(:destroy, Representative) %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form">
+  <div class="col-md-12">
+    <div class="box">
+      <%= messages %>
+
+      <%= simple_form_for(@representative) do |f| %>
+
+      <%= f.error_notification %>
+
+
+      <div class="form-inputs">
+
+        <legend>Justificativa da rejeição do cadastro</legend>
+        <div class="row">
+          <div class="col-md-8">
+              <%= f.input :mensagem, as: :text, required: true, input_html: { autofocus: true, rows: 5 } %>
+          </div>
+        </div>
+
+        <%= f.submit "", class: "hide", data: {confirm: "Você tem certeza que deseja rejeitar o cadastro?"} %>
+      </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

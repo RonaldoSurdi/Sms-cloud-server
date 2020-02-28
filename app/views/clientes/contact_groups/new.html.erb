@@ -1,0 +1,36 @@
+<%= content_for :angular_controller, "FormContactGroupController" %>
+
+<div class="container">
+  <div class="row form">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header">
+          <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <%= link_to "Contatos", contacts_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <%= link_to "Grupos", contact_groups_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <span>Cadastro de Grupos</span>
+        </div>
+
+        <div class="box-content">
+          <div id="mensagens">
+            <div class="alert {{mensagem.tipoAlert}} alert-dismissable" ng-show="submited">
+              <button type="button" class="close" aria-hidden="true" ng-click="submited = false">&times;</button>
+              {{mensagem.texto}}
+            </div>
+          </div>
+
+          <%= simple_form_for(@contact_group, html: {"ng-submit" => "cadastrarGrupo($event)"}) do |f| %>
+            <%= render partial: "form", locals: { f: f } %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: postgres
+  password: thcbito666@
+  host: localhost
+  database: sms_development
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: postgres
+  password: thcbito666@
+  host: localhost
+  database: sms_test
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: postgres
+  password: thcbito666@
+  host: localhost
+  database: sms_production

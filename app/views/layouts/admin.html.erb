@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Administração | SendMy</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="robots" content="noindex,nofollow">
+
+    <%= stylesheet_link_tag "admin/admin", media: "all", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag "favicon.png", rel: "icon", type: "image/png" %>
+
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "admin/flatty/ie/html5shiv.js" %>
+      <%= javascript_include_tag "admin/flatty/ie/respond.min.js" %>
+    <![endif]-->
+
+    <%= javascript_include_tag 'admin/admin', 'data-turbolinks-track' => true %>
+  </head>
+
+  <body class="crud contrast-dark <%= yield(:class_body) %> fixed-header <%= controller_name %>"
+      data-controller="<%= controller_name %>"
+      <%= raw(content_for?(:angular_controller) ? "ng-controller=\"#{content_for(:angular_controller)}\"" : "") %>>
+    <%= render partial: "layouts/header_admin" if administrator_signed_in? %>
+
+    <% if administrator_signed_in? %>
+      <div id="wrapper">
+        <div id="main-nav-bg"></div>
+        <nav class="main-nav-fixed" id="main-nav">
+          <div class="navigation">
+            <ul class="nav nav-stacked">
+              <li>
+                <%= link_to administrator_root_path, data: {controller: "home"} do %>
+                  <i class="icon-dashboard"></i>
+                  <span>Dashboard</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to administrators_path, data: {controller: "administrators"} do %>
+                  <i class="icon-user"></i>
+                  <span>Administradores</span>
+                <% end if can? :read, Administrator %>
+              </li>
+              <li>
+                <%= link_to roles_path, data: {controller: "roles"} do %>
+                  <i class="icon-check"></i>
+                  <span>Permissões</span>
+                <% end  if can? :read, Role %>
+              </li>
+              <li>
+                <% if can? :read, Representative %>
+                  <%= link_to "#", class: "dropdown-collapse", data: {controller: "representatives"} do %>
+                    <i class="icon-briefcase"></i>
+                    <span>Representantes</span>
+                    <i class='icon-angle-down angle-down'></i>
+                  <% end %>
+
+                  <ul class='nav nav-stacked <%= (controller_name == "representatives") ? "in" : "" %>'>
+                    <li>
+                      <%= link_to representatives_path(status: :todos) do %>
+                        <i class='icon-asterisk'></i>
+                        <span>Todos</span>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to representatives_path(status: :aprovado) do %>
+                        <i class='icon-flag text-success'></i>
+                        <span>Aprovados</span>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to representatives_path(status: :nao_aprovado) do %>
+                        <i class='icon-flag-alt text-warning'></i>
+                        <span>Não Aprovados</span>
+                      <% end %>
+                    </li>
+                  </ul>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to customers_path, data: {controller: "customers"} do %>
+                  <i class="icon-group"></i>
+                  <span>Clientes</span>
+                <% end if can? :read, Customer %>
+              </li>
+              <li>
+                <%= link_to our_customers_path, data: {controller: "our_customers"} do %>
+                  <i class="icon-male"></i>
+                  <span>Nossos Clientes</span>
+                <% end if can? :read, OurCustomer %>
+              </li>
+              <li>
+                <%= link_to plans_path, data: {controller: "plans"} do %>
+                  <i class="icon-list-alt"></i>
+                  <span>Pacote de SMS</span>
+                <% end if can? :read, Plan %>
+              </li>
+              <li>
+                <% if can? :read, License %>
+                  <%= link_to "#", class: "dropdown-collapse", data: {controller: "licenses"} do %>
+                    <i class="icon-certificate"></i>
+                    <span>Licenças</span>
+                    <i class='icon-angle-down angle-down'></i>
+                  <% end %>
+
+                  <ul class='nav nav-stacked <%= (controller_name == "licenses") ? "in" : "" %>'>
+                    <li>
+                      <%= link_to licenses_path(tipo: :todas) do %>
+                        <i class='icon-asterisk'></i>
+                        <span>Todas</span>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to licenses_path(tipo: :nova) do %>
+                        <i class='icon-sun text-warning'></i>
+                        <span>Licenças Novas</span>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to licenses_path(tipo: :renovacao) do %>
+                        <i class='icon-moon text-muted'></i>
+                        <span>Licenças de Renovação</span>
+                      <% end %>
+                    </li>
+                  </ul>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "#", class: "dropdown-collapse", data: {controller: "license_movements"} do %>
+                  <i class="icon-money"></i>
+                  <span>Venda de Licenças</span>
+                  <i class='icon-angle-down angle-down'></i>
+                <% end %>
+
+                <ul class='nav nav-stacked <%= (controller_name == "license_movements") ? "in" : "" %>'>
+                  <li>
+                    <%= link_to license_movements_path(status: :todas) do %>
+                      <i class='icon-asterisk'></i>
+                      <span>Todas</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to license_movements_path(status: :confirmadas) do %>
+                      <i class='icon-check text-success'></i>
+                      <span>Compras Confirmadas</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to license_movements_path(status: :aguardando) do %>
+                      <i class='icon-refresh text-warning'></i>
+                      <span>Aguardando Confirmação</span>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <%= link_to "#", class: "dropdown-collapse", data: {controller: "plan_movements"} do %>
+                  <i class="icon-dollar"></i>
+                  <span>Venda de Pacotes</span>
+                  <i class='icon-angle-down angle-down'></i>
+                <% end %>
+
+                <ul class='nav nav-stacked <%= (controller_name == "plan_movements") ? "in" : "" %>'>
+                  <li>
+                    <%= link_to plan_movements_path(status: :todas) do %>
+                      <i class='icon-asterisk'></i>
+                      <span>Todas</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to plan_movements_path(status: :confirmadas) do %>
+                      <i class='icon-check text-success'></i>
+                      <span>Compras Confirmadas</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to plan_movements_path(status: :aguardando) do %>
+                      <i class='icon-refresh text-warning'></i>
+                      <span>Aguardando Confirmação</span>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <section id="content">
+          <div class="container">
+            <div class="row" id="content-wrapper">
+              <div class="col-xs-12">
+                <%= content_for?(:content) ? yield(:content) : yield %>
+              </div>
+            </div>
+
+            <footer id="footer">
+              <div class="footer-wrapper">
+                <div class="row">
+                  <div class="col-sm-6 text">
+                    <a target="_blank" href="<%= root_url %>">SendMy | Copyright <%= Date.today.year %></a>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </section>
+      </div>
+    <% else %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    <% end %>
+
+    <%= yield :scripts %>
+    <script>
+      $(document).on("page:change", function() {
+        app.order = "<%= @order %>";
+        app.asc_desc = "<%= @asc_desc %>";
+
+        if (app.order !== "") {
+          $("[data-order=" + app.order.replace(".", "\\.") + "]").addClass("active").attr("data-ascdesc", app.asc_desc);
+        }
+      });
+    </script>
+  </body>
+</html>

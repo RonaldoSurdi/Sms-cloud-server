@@ -1,0 +1,52 @@
+<%= content_for :class_body, "contrast-background login" %>
+
+<div class="middle-container">
+  <div class="middle-row">
+    <div class="middle-wrapper">
+      <div class="login-container-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <h2>
+                  <%= image_tag "sendmy_sms.png", title: "SendMy", alt: "SendMy", class: "logo" %>
+                  <br><br>
+                  <small>REPRESENTANTE</small>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+              <h1 class="text-center title">Recupere sua senha aqui</h1>
+              <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+
+                <%= f.input :email, input_html: {autofocus: true}, required: true %>
+
+                <%= messages %>
+
+                <%= f.submit "Recuperar", class: "btn btn-block" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="login-container-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <a target="_blank" href="<%= root_url %>">SendMy | Copyright <%= Time.now.strftime '%Y' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

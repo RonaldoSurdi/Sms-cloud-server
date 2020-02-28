@@ -1,0 +1,36 @@
+<% content_for :angular_controller, "CompraPacoteController" %>
+
+<div class="container" ng-init='buscarPacotePorCodigoPagSeguro("<%= params["id_pagseguro"] %>")'>
+  <section>
+    <br/><br/>
+    <div class="titulo">
+      <h5 class="text-success">
+        <strong>O saldo será adicionado à sua conta após a confirmação do pagamento. Por favor, aguarde a confirmação...</strong>
+      </h5>
+      <br/>
+    </div>
+
+    <div class="buscando" ng-show="buscando">
+      <p><strong>Buscando pacote, aguarde...</strong></p>
+    </div>
+
+    <div class="conteudo" ng-show="pacote">
+      <big class="row">
+        <p class="col-xs-3">
+          <strong>
+            Descrição do Pacote:<br/>
+            Tipo do Pacote:<br/>
+            Quantidade de SMS's:<br/>
+            Valor:
+          </strong>
+        </p>
+        <p class="col-xs-9">
+          {{pacote.plano_descricao}}<br/>
+          {{capitalize(pacote.plano_tipo)}}<br/>
+          {{pacote.quantidade_sms}} SMS's<br/>
+          {{pacote.plano_valor_total | currency}}
+        </p>
+      </big>
+    </div>
+  </section>
+</div>

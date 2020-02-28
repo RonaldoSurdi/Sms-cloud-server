@@ -1,0 +1,31 @@
+(function() {
+  var erro = "<%= @erro %>";
+  if (erro !== "") {
+    alert("<%= @erro %>");
+    <% unless @nao_encontrado %>
+      $("#representative_endereco_attributes_cidade, #customer_endereco_attributes_cidade").val("").removeAttr("readonly");
+      $("#representative_endereco_attributes_uf, #customer_endereco_attributes_uf").removeAttr("disabled");
+
+      setTimeout(function() {
+        $("#representative_endereco_attributes_uf, #customer_endereco_attributes_uf").focus();
+      }, 200);
+    <% end %>
+  } else {
+    <% @cep[:tipo_logradouro] += " " if @cep[:tipo_logradouro].present? %>
+    var cep = <%= raw @cep.to_json %>;
+
+    if (cep.city) {
+      $("#representative_endereco_attributes_cidade, #customer_endereco_attributes_cidade").val(cep.city);
+      $("#representative_endereco_attributes_uf, #customer_endereco_attributes_uf").val(cep.state);
+      $("#representative_endereco_attributes_logradouro, #customer_endereco_attributes_logradouro").val(cep.address);
+      $("#representative_endereco_attributes_bairro, #customer_endereco_attributes_bairro").val(cep.neighborhood);
+      $("#representative_endereco_attributes_complemento, #customer_endereco_attributes_complemento").val(cep.complement);
+    } else {
+      $("#representative_endereco_attributes_cidade, #customer_endereco_attributes_cidade").val("");
+      $("#representative_endereco_attributes_uf, #customer_endereco_attributes_uf").val("");
+      $("#representative_endereco_attributes_logradouro, #customer_endereco_attributes_logradouro").val("");
+      $("#representative_endereco_attributes_bairro, #customer_endereco_attributes_bairro").val("");
+      $("#representative_endereco_attributes_complemento, #customer_endereco_attributes_complemento").val("");
+    }
+  }
+})();

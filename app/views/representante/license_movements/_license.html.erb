@@ -1,0 +1,27 @@
+<div class="col-sm-6 col-md-3" title="<%= license.descricao %>">
+  <div class="pricing-table">
+    <div class="header"><%= license.descricao %></div>
+    <div class="price <%= sequencial_background %>">
+      <span> <%= license.valor_unitario.reais_contabeis %> </span>
+    </div>
+    <ul class="list-unstyled features">
+      <li>
+        <strong><%= license.plan.quantidade_sms %> SMS/Ano</strong><br/>
+      </li>
+      <li>
+        Valor sugerido de venda<br/>
+        <strong><%= license.valor_sugerido.reais_contabeis %></strong>
+      </li>
+    </ul>
+    <div class="footer row">
+      <div class="col-xs-12">
+        <strong>Quantidade</strong><br/>
+        <div class="col-md-8 col-md-offset-2">
+          <%= text_field_tag "license_movement[#{license.id}]", @movements_quantities.try(:[], license.id.to_s).to_i, type: :number,
+                            class: "form-control col-xs-12", data: {"valor-unitario" => license.valor_unitario} %>
+          <span data-subtotal></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

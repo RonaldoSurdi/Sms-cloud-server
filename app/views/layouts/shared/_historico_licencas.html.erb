@@ -1,0 +1,59 @@
+<% if customer.license_movements.try(:last).try(:vendida?) %>
+  <div class="accordion accordion-dark panel-group" id="history-accordion">
+    <% customer.license_movements.each do |license| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a class="accordion-toggle" data-parent="#history-accordion" data-toggle="collapse" href="<%= "##{license.id}-history-accordion" %>">
+            <%= license.licenca_descricao %>&nbsp;
+            <% if (current_license_id == license.id) %>
+              <i class="icon-arrow-right"></i>
+              (Em Uso)
+            <% end %>
+          </a>
+        </div>
+        <div class="panel-collapse collapse <%= "in" if (current_license_id == license.id) %>" id="<%= "#{license.id}-history-accordion" %>">
+          <div class="panel-body">
+
+            <% if current_user.class == Administrator %>
+              <div class="row">
+                <label class="col-md-2 control-label text-right label-show">Representante</label>
+                <div class="col-md-10">
+                  <label class="form-control auto-height text-normal input-xs"><%= customer.representative.nome_fantasia %></label>
+                </div>
+              </div>
+            <% end %>
+
+            <%= show_input_tag(license, :data_venda_cliente, license.data_venda_cliente.to_s_br) %>
+            <%= show_input_tag(license, :validade_inicio, license.validade_inicio.to_s_br) if license.data_venda_cliente != license.validade_inicio %>
+            <%= show_input_tag(license, :validade_fim, license.try(:validade_fim).try(:to_s_br)) %>
+            <%= show_input_tag(license, :plano_quantidade_sms, "#{license.plano_quantidade_sms} SMS's") %>
+            <%= show_input_tag(license, :valor_venda_cliente, license.valor_venda_cliente.reais_contabeis) %>
+
+            <div class="row">
+              <div class="col-md-offset-2 col-md-2">
+                <br/>
+                <a href="<%= (current_user.class == Administrator) ? license_movement_path(license.id) : representative_license_movement_path(license.id) %>"
+                    class="btn btn-default">
+                  <i class="icon-eye-open"></i>&nbsp;
+                  Ver Licença
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="mensagens">
+        <br/>
+        <%= content_tag :div, class: "alert alert-info" do %>
+          <i class="icon-info"></i>&nbsp;&nbsp;
+          Este cliente ainda não adquiriu nenhuma licença.
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

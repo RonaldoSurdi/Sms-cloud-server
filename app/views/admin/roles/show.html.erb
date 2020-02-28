@@ -1,0 +1,50 @@
+<%= actions(:role) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <%= show_input_tag(@role, :description) %>
+
+        <% @role.permissions.each do |permission| %>
+          <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+              <label for="" class="form-control auto-height">
+                <p><%= t(permission.subject, scope: "models") %></p>
+                <ul class="list-unstyled">
+                  <% authorizable_actions_of(permission.subject).each do |authorizable_action| %>
+                    <li>
+                      <i class="<%= permission.actions.include?(authorizable_action.to_s) ? "icon-check" : "icon-check-empty" %>"></i>
+                      <%= t(authorizable_action, scope: "simple_form.labels.role.actions") %>
+                    </li>
+                  <% end %>
+                </ul>
+              </label>
+            </div>
+          </div>
+        <% end unless @role.full_control %>
+
+        <% authorizable_models.each do |permission| %>
+          <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+              <label for="" class="form-control auto-height">
+                <p><%= t(permission, scope: "models") %></p>
+                <ul class="list-unstyled">
+                  <% authorizable_actions_of(permission).each do |authorizable_action| %>
+                    <li>
+                      <i class="icon-check"></i>
+                      <%= t(authorizable_action, scope: "simple_form.labels.role.actions") %>
+                    </li>
+                  <% end %>
+                </ul>
+              </label>
+            </div>
+          </div>
+        <% end if @role.full_control %>
+
+      </div>
+    </div>
+  </div>
+</div>

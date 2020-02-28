@@ -1,0 +1,49 @@
+<section class="login-clientes bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="text-center">Login</h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="form-inputs">
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :email, required: true, autofocus: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :password, required: true %>
+              </div>
+            </div>
+
+            <br/>
+            <%= messages %>
+
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Entrar", class: "btn btn-default col-md-12" %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+
+      <div class="col-xs-12">
+        <br>
+        <br>
+
+        <p class="text-center">
+          <strong>Você se cadastrou como um representante?</strong><br/>
+          <%= link_to "Clique aqui para acessar o painel do representante.", new_representative_session_path %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

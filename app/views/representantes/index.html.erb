@@ -1,0 +1,47 @@
+<% content_for :angular_controller, "RepresentantesController" %>
+<section>
+  <div class="container">
+    <div class="row mapa-brasil">
+      <div class="col-xs-12">
+        <br>
+        <h2>Nossos representantes</h2>
+        <h4>ENCONTRE UM DE NOSSOS REPRESENTANTES PERTO DE VOCÊ!</h4>
+        <br/><br/>
+      </div>
+      <div class="col-xs-6">
+        <%= render 'mapa_brasil' %>
+      </div>
+      <div class="col-xs-6 listagem-representantes">
+        <div ng-show="carregando">
+          <h5 class="text-center">
+            <i class="icon-spinner icon-spin"></i>&nbsp;&nbsp;
+            Carregando representantes...
+          </h5>
+        </div>
+
+        <div ng-hide="estadoSelecionado.uf != null || carregando">
+          <h5 class="text-center">
+            <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+            Escolha um estado ao lado
+          </h5>
+        </div>
+
+        <div ng-hide="estadoSelecionado.uf == null || carregando">
+          <br>
+          <h5 class="text-center" style="text-transform: uppercase">
+            <strong>REPRESENTANTES&nbsp;&nbsp;/&nbsp;&nbsp;{{estadoSelecionado.nome + " - " + estadoSelecionado.uf}}</strong>
+          </h5>
+        </div>
+
+        <br/>
+
+        <div ng-repeat="representante in representantes track by $index">
+          <h4><strong>{{representante.nome_fantasia}}</strong></h4>
+          E-Mail: {{representante.email}}
+          <br>
+          Telefone: {{formatarTelefone(representante.telefone)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

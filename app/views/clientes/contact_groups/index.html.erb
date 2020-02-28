@@ -1,0 +1,148 @@
+<% content_for :angular_controller, "ContactGroupController" %>
+
+<div class="container index_contacts">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <div class="col-xs-9">
+            <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+            <i class="icon-chevron-right"></i>&nbsp;
+
+            <%= link_to "Contatos", contacts_path, class: "link-header" %>&nbsp;
+            <i class="icon-chevron-right"></i>&nbsp;
+
+            <span>Grupos</span>&nbsp;&nbsp;&nbsp;
+            <i class="icon-spinner icon-spin" ng-show="working"></i>
+          </div>
+        </div>
+
+        <div class="box-content">
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= link_to new_contact_group_path, class: "btn btn-success" do %>
+                  <i class="icon-plus"></i>&nbsp;Novo Grupo
+                <% end %>
+
+                <%= link_to contacts_path, class: "btn btn-info" do %>
+                  <i class="icon-mobile-phone"></i>&nbsp;Contatos
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group input optional">
+                <input type="text" class="form-control" placeholder="Pesquisar por Descrição/Observação..." ng-model="filterString" autofocus>
+
+                <div class="padding-top">
+                  <span class="text-muted">
+                    <strong>{{quantidade = (groups | filter:filterString).length}}</strong>
+                    {{(quantidade == 1) ? "Registro Listado" : "Registros Listados"}}
+                  </span>
+                  <span id="index_mensagem" class="pull-right label {{mensagem.label}}" ng-model="canShowMesssage" ng-show="canShowMesssage"
+                        ng-init="mensagem.texto = <%= (alert || notice) ? ("\'" + (alert || notice) + "\'; mostrarMensagem();") : "\'\';" %>
+                                mensagem.label = <%= alert ? "\'label-danger\'" : "\'label-success\'" %>">
+                    {{mensagem.texto}}
+                  </span>
+                  <br/>
+                </div>
+              </div>
+
+              <div class="box box-nomargin box-no-shadow">
+                <div class="box-header box-header-small muted-background">
+                  <div class="title">
+                    <span ng-show="working"><%= image_tag "flatty/ajax-loaders/17.gif" %>&nbsp;&nbsp;Carregando Resultados</span>
+                    <span ng-hide="working">Resultados</span>
+                  </div>
+                </div>
+
+                <div class="box-content">
+                  <p ng-show="groups.length == 0" class="alert alert-info"><i class="icon-info-sign"></i>&nbsp;Nenhum resultado encontrado</p>
+
+                  <table class="table table-hover table-striped" ng-show="groups">
+                    <thead>
+                      <tr>
+                        <th>Descrição</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr ng-repeat="group in (groups | filter: filterString) track by group.id" ng-click="openModalShowGroupContacts(group.id, $event)">
+                        <td>{{group.descricao}}</td>
+                        <td class="text-right">
+                          <span class="badge badge-default">
+                            <small>
+                              {{group.quantidade_contatos}}&nbsp;
+                              {{(group.quantidade_contatos == 1) ? "Contato" : "Contatos"}}
+                            </small>
+                          </span>
+                          <a href="{{group.edit_html_url}}" class="btn btn-success btn-xs">Editar</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-4">
+              <%= link_to contacts_path, class: "btn btn-default col-xs-12" do %>
+                <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                <strong>VOLTAR</strong>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="<%= "#{action_name}_#{controller_name}_modal" %>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          <h4 class="modal-title">
+            Informações do Grupo&nbsp;&nbsp;&nbsp;
+            <i class="icon-spinner icon-spin" ng-show="workingModal"></i>
+          </h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show">Descrição</label>
+            <div class="col-md-10">
+              <label class="form-control auto-height text-normal input-xs">{{selectedGroup.descricao}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show">Observação</label>
+            <div class="col-md-10">
+              <label class="form-control text-normal input-xs label-for-textarea">
+                {{selectedGroup.observacao}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn btn-success" ng-model="selectedGroup" ng-href="{{selectedGroup.edit_html_url}}">Editar</a>
+          <a class="btn btn-danger" ng-model="selectedGroup" ng-click="excluirGrupo(selectedGroup.id)">Excluir</a>
+          <a class="btn btn-default" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

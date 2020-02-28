@@ -1,0 +1,72 @@
+<%= content_for :class_body, "contrast-background login" %>
+
+<div class="middle-container">
+  <div class="middle-row">
+    <div class="middle-wrapper">
+      <div class="login-container-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <%= image_tag "sendmy_sms.png", alt: "SendMy SMS" %>
+              <br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <h2>
+                  <strong>REPRESENTANTES</strong>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+              <h1 class="text-center title">Acessar</h1>
+
+              <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+                <div class="form-group">
+                  <div class="controls with-icon-over-input">
+                    <%= f.text_field :email, class: "form-control", required: true, placeholder: "Email do Representante", autofocus: true %>
+                    <i class="icon-user text-muted"></i>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="controls with-icon-over-input">
+                    <%= f.password_field :password, class: "form-control", required: true, placeholder: "Senha" %>
+                    <i class="icon-lock text-muted"></i>
+                    <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), style: "color: #000" %><br />
+                  </div>
+                </div>
+
+                <%= messages %>
+
+                <%= f.submit "Entrar", class: "btn btn-block" %>
+                <br/>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-container-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <a target="_blank" href="<%= root_url %>">SendMy | Copyright <%= Time.now.strftime '%Y' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

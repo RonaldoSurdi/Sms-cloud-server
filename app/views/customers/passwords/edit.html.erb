@@ -1,0 +1,36 @@
+<section class="recuperar-senha-clientes bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <br/>
+        <h3 class="text-center">Alteração de Senha</h3>
+        <br/>
+
+        <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+          <%= f.input :reset_password_token, as: :hidden %>
+
+          <%= f.input :password, input_html: {autofocus: true}, placeholder: "Nova Senha", required: true %>
+          <%= f.input :password_confirmation, placeholder: "Confirmação de Senha", required: true %>
+
+          <%= messages %>
+
+          <div id="mensagens">
+            <%= content_tag :div, class: "alert alert-danger alert-dismissable" do %>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              O link acessado não é mais válido para alterar a senha.
+            <% end if resource.errors.try(:messages).try(:[], :reset_password_token).try(:join).try(:present?)  %>
+          </div>
+
+          <br/>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <%= f.submit "Alterar", class: "btn btn-default col-md-12" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

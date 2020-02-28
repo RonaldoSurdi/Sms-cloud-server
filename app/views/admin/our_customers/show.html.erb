@@ -1,0 +1,34 @@
+<%= actions(:our_customer) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <%= show_input_tag(@our_customer, :descricao) %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.our_customer.url") %></label>
+          <div class="col-md-10">
+            <a href="<%= @our_customer.url %>" target="_blank">
+              <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                <%= @our_customer.url %>
+              </label>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.our_customer.logo") %></label>
+          <div class="col-md-4">
+            <label class="form-control auto-height text-center">
+              <%= image_tag(@our_customer.logo.url(:thumb)) %>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

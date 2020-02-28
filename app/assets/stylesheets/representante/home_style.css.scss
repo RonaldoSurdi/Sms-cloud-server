@@ -1,0 +1,21 @@
+.loader {
+  float: right;
+  margin: 10px 5px 0;
+}
+
+li.disabled {
+  color: #777;
+  background: #eee;
+}
+
+.list-group-sortable-connected li[draggable] {
+  cursor: pointer;
+}
+
+a.accordion-toggle {
+  text-decoration: none !important;
+}
+
+a.accordion-toggle:hover {
+  color: #DDD !important;
+}

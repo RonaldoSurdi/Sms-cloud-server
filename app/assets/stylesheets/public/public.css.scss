@@ -1,0 +1,122 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "compass";
+@import "flatty/theme/variables";
+@import "flatty/theme/utilities";
+
+$lightest: #f4f4f4;
+$light: #dddddd;
+
+$dark: #3c3c3c;
+$darkest: #222222;
+
+$white: #fff;
+$contentBackground: #fbfbfb;
+
+// header
+$headerBackground: $contrast;
+$headerBrandColor: $white;
+$headerSearchButtonColor: $headerBackground;
+
+// navigation
+$showNavCaret: false;
+$navBackground: $lightest;
+$navBorder: $light;
+$navItemBackround: $lightest;
+$navItemBorderTop: darken($navBackground, 5%);
+$navItemBorderBottom: lighten($navBackground, 5%);
+$navItemHoverFocusBackground: lighten($contentBackground, 1%);
+$navIcon: #6e6e6e;
+$navText: $dark;
+$navIconHoverFocus: $contrast;
+$navTextHoverFocus: $darkest;
+$navHeaderColor: lighten($navBackground, 20%);
+$navWidth: 250px;
+$navClosedWidth: 45px;
+
+$navSecondBorder: transparent;
+$navSecondBackground: darken($lightest, 6%);
+$navSecondItemBorder: darken($navSecondBackground, 10%);
+$navSecondItemHoverFocusBackground: lighten($navSecondBackground, 3%);
+
+//type
+$pageHeaderBackground: $white;
+$pageHeaderColor: $darkest;
+$pageHeaderBorder: $light;
+$pageHeaderIconColor: $contrast;
+$pageHeaderBreadCrumbHover: $contrast;
+
+//timeline
+$timelineLine: $light;
+$timelineContentBackground: $white;
+$timelineIconColor: $white;
+
+//boxes
+$boxBorder: $light;
+$boxBackground: $white;
+$boxHeaderColor: $dark;
+$boxActionsColor: darken($light, 10%);
+$boxActionsHoverColor: $contrast;
+$boxTextContrastColor: $white;
+$boxActionsContrastColor: $white;
+$boxActionsContrastHoverBackground: $white;
+$boxToolboxBackground: $lightest;
+$boxToolboxBorder: $light;
+
+//quick links
+$quickIconColor: $white;
+$quickContentColor: darken($lightest, 60%);
+$quickContentBackground: darken($lightest, 10%);
+$quickContentHoverBackground: darken($lightest, 15%);
+$quickContentBorder: darken($lightest, 15%);
+$quickContentHoverBorder: darken($lightest, 20%);
+
+//statistic boxes
+$statBoxBackground: $white;
+$statBoxContrastColor: $white;
+
+//calendar
+$calButtonBackground: $white;
+$calButtonHoverBackground: $light;
+
+//chat
+$chatMessageBorder: $light;
+$fixedChatHeaderBackground: $contrast;
+$fixedChatHeaderColor: $white;
+$fixedChatActionsColor: $white;
+
+//forms
+$formActionsBackground: $lightest;
+$formStripedBorder: $light;
+$formStripedBackground: $lightest;
+
+$inputBorder: darken($light, 5%);
+$inputBackground: $white;
+$inputFocusBorderColor: darken($light, 20%);
+$inputFocusShadow: rgba(220, 225, 229, 1);
+
+//gallery
+$galleryActionsColor: $white;
+$galleryActionsBackground: rgba(0, 0, 0, .3);
+
+//recent activity
+$recentBorder: $light;
+
+//wizard
+$wizardStepCompleteBackground: $green;
+$wizardStepCompleteColor: $white;
+$wizardStepActiveBackground: $contrast;
+$wizardStepActiveColor: $white;
+$wizardStepBackground: $light;
+$wizardStepColor: darken($lightest, 70%);
+
+@import "flatty/theme/font-awesome";
+@import "flatty/theme/content";
+@import "flatty/theme/boxes";
+@import "flatty/theme/tabs";
+@import "flatty/plugins/select2/select2";
+@import "flatty/plugins/slider_nav/slidernav";
+@import "flatty/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.scss";
+
+@import "estilos";

@@ -1,0 +1,76 @@
+<br/>
+<section class="cliente-comprar-licencas">
+  <div class="container">
+    <div class="box">
+      <div class="box-header">
+        <div class="col-xs-9">
+          <%= link_to "Painel de Opções", painel_opcoes_index_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <span>Comprar/Renovar Licenças</span>
+        </div>
+      </div>
+      <div class="box-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>Contate seu representante para adquirir licenças</h3>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-xs-2 text-right"><strong>Representante:</strong></div>
+          <div class="col-xs-10"><%= @representative.nome_fantasia %></div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-xs-2 text-right">
+            <strong>
+              E-Mail:<br/>
+              Telefone:<br/>
+              <%= "Celular:" if @representative.celular.present? %>
+            </strong>
+          </div>
+          <div class="col-xs-10">
+            <%= @representative.email %><br/>
+            <%= @representative.telefone_formatado %><br/>
+            <%= @representative.celular_formatado if @representative.celular.present? %>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-xs-2 text-right">
+            <strong>
+              Cidade:<br/>
+              Logradouro:<br/>
+              Bairro:
+            </strong>
+          </div>
+          <div class="col-xs-10">
+            <%= "#{@representative.endereco.cidade} - #{@representative.endereco.uf}" %><br/>
+
+            <%= @representative.endereco.logradouro %>
+            <%= " - #{@representative.endereco.complemento}" if @representative.endereco.complemento.present? %>
+            <br/>
+
+            <%= @representative.endereco.bairro %>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-xs-2 text-right"><strong>Falar com:</strong></div>
+          <div class="col-xs-10"><%= @representative.responsavel %></div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= link_to painel_opcoes_index_path, class: "btn btn-default col-xs-12" do %>
+              <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+              <strong>VOLTAR</strong>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+</section>

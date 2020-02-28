@@ -1,0 +1,147 @@
+<section class="cadastro-clientes bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-5">
+        <h2>Por que utilizar <br> o nosso sistema?</h2>
+        <ul>
+          <li>Quase 290  milhões de celulares ativos no Brasil. 100 % recebem SMS;</li>
+          <li>O SMS é muito mais lido que o e-mail e mala direta;</li>
+          <li>Comunicação rápida e eficaz – mensagem chega em segundos;</li>
+          <li>Cerca de 97% é a média de leitura dos SMS enviados;</li>
+          <li>Custo até 90% menor que os meios de comunicação convencionais (rádio, jornal, TV, etc);</li>
+          <li>Comunicação sustentável – não utiliza papel, tintas e demais insumos poluentes.</li>
+        </ul>
+        <h3>Nosso sistema</h3>
+        <ul>
+          <li>Sistema fácil de se utilizar com acesso web de qualquer computador, tablet ou smartphone;</li>
+          <li>Permite envio de SMS simples ou em massa;</li>
+          <li>Ferramenta de agendamento dos envios;</li>
+          <li>Gestão de contatos e grupos;</li>
+          <li>Gestão de mensagens (salva mensagens na plataforma);</li>
+          <li>Gestão de contas e subcontas;</li>
+          <li>Velocidade de envio dos SMS;</li>
+          <li>Emissão de relatórios.</li>
+        </ul>
+        <hr/>
+        <p>
+          <strong>Se cadastrou e não recebeu o e-mail de confirmação?</strong>
+          <br/>
+          <%= link_to "Clique aqui para reenviar o e-mail.", new_customer_confirmation_path %>
+        </p>
+      </div>
+      <div class="col-xs-7">
+        <h3 class="text-center">Preencha o formário abaixo.</h3>
+        <br/>
+
+        <%= messages %>
+
+        <%= simple_form_for(@customer, url: public_customers_url) do |f| %>
+
+          <div class="form-inputs">
+
+          <h4 class="azul-sendmy">Informações Gerais</h4>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :tipo_pessoa, as: :radio_buttons,
+                            collection: Customer.tipo_pessoas.collect{ |k,v| [k, k] },
+                            label_method: ->(action_label) { t(action_label.first, scope: "tipo_pessoa") },
+                            value_method: :last %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :nome, label: "Nome completo", input_html: { autofocus: true } %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :cpf_cnpj, required: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :razao_social, required: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :telefone, input_html: {"data-mascara" => "telefone"} %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :celular, required: false, input_html: {"data-mascara" => "telefone"} %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :representative_id, collection: @representatives, value_method: :id, label_method: :nome_fantasia, input_html: {class: "select2"} %>
+              </div>
+            </div>
+
+            <h4 class="azul-sendmy">Informações de acesso</h4>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :email, required: true %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :password, required: true %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :password_confirmation, required: true %>
+              </div>
+            </div>
+
+            <h4 class="azul-sendmy">Localização</h4>
+            <hr>
+            <%= f.simple_fields_for :endereco do |ff| %>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :cep, input_html: {"data-mascara" => "cep"}, hint: raw('<a href="http://www.buscacep.correios.com.br/" target="_blank" tabindex="-1">Não sabe o seu cep?</a>') %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :uf, collection: UF.all.collect { |k,v| [v,k] }, required: true %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :cidade, required: true %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :logradouro %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <%= ff.input :bairro %>
+                </div>
+                <div class="col-md-6">
+                  <%= ff.input :complemento, required: false %>
+                </div>
+              </div>
+
+            <% end %>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Cadastrar", class: "btn btn-default col-md-12" %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

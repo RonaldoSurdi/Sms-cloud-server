@@ -1,0 +1,126 @@
+<% content_for :angular_controller, "CustomerSaleController" %>
+
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span>Vender Licenças</span>
+          </h1>
+
+          <%= link_to representative_customers_path, class: "btn btn-warning pull-right btn-action spacing" do %>
+            <i class="icon-remove"></i><br>Cancelar
+          <% end %>
+
+          <%= link_to new_public_customer_path(current_user.representante_principal? ? {} : { representative_id: current_user.id }),
+                class: "btn pull-right btn-action btn-success", target: :_blank do %>
+            <i class="icon-plus"></i><br>Novo Cliente
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row form">
+  <div class="col-md-12">
+    <div class="box">
+      <%= messages %>
+
+        <div class="form-inputs">
+
+          <legend>Selecione o Cliente&nbsp;&nbsp;&nbsp;<i class="icon-spinner icon-spin" ng-show="working"></i></legend>
+          <div class="row">
+            <div class="col-sm-5">
+              <%= select_tag "sale[customer_id]", options_from_collection_for_select(@customers, :id, :nome), class: "select2", autofocus: true, include_blank: true,
+                    "data-select" => params[:customer_id].to_s, "ng-model" => "selectedCustomer", "ng-change" => "procurarLicencas()" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="mensagens" ng-show="mostrar && licenseMovements.length == 0">
+                <br/>
+                <%= content_tag :div, class: "alert alert-info alert-dismissable" do %>
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <i class="icon-info"></i>&nbsp;&nbsp;
+                  Você não possui nenhuma licença! Adquira algumas para que você possa revendê-las aos seus clientes.
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="pricing-tables" ng-show="mostrar && licenseMovements.length > 0">
+            <br/>
+            <legend>Selecione a Licença</legend>
+            <div class="row">
+
+              <div class="col-sm-6 col-md-3" ng-repeat="license in licenseMovements" title="{{license['licenca_descricao']}}">
+                <%= form_tag(sell_representative_customers_path) do %>
+                  <div class="pricing-table">
+                    <div class="header">{{license["licenca_descricao"]}}</div>
+                    <div class="price {{license.background}}">
+                      <span> {{license.licenca_valor_sugerido}} </span>
+                    </div>
+                    <ul class="list-unstyled features">
+                      <li>
+                        Plano de Envio Inicial<br/>
+                        <strong>{{license.plano_descricao}}</strong><br/>
+                        <small class="text-muted">({{license["plano_quantidade_sms"]}} SMS/Ano)</small>
+                      </li>
+                      <li>
+                        <strong>{{license.quantidade}}</strong>&nbsp;
+                        {{(license.quantidade == 1) ? "Licença Restante" : "Licenças Restantes"}}
+                      </li>
+                    </ul>
+                    <div class="footer">
+                      <%= button_tag "Vender Uma Licença", class: "btn btn-default", type: "button", "ng-click" => "abrirModal($index)" %>
+                    </div>
+                    <br/>
+                  </div>
+
+                  <div class="modal fade" id="sale_modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                          <h4 class="modal-title">
+                            Valor da Venda ao Cliente&nbsp;&nbsp;&nbsp;
+                          </h4>
+                        </div>
+
+                        <div class="modal-body">
+                          <div class="row">
+                            <label class="col-md-3 control-label text-right label-show">Valor da Venda</label>
+                            <div class="col-md-9">
+                              <%= text_field_tag "sale[valor_venda_cliente]", "", class: "form-control", "data-mascara" => "dinheiro" %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-xs-12 control-label label-show text-right text-muted text-sm">
+                              <small>Sugestão de Valor: {{selectedLicense.licenca_valor_sugerido}}</small>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="modal-footer">
+                          <input type="hidden" name="sale[license_id]" ng-value="selectedLicense.license_id">
+                          <input type="hidden" name="sale[customer_id]" ng-value="selectedCustomer">
+                          <%= submit_tag "Vender Uma Licença", class: "btn btn-primary", data: { confirm: "Você tem certeza?" } %>
+                          <a class="btn btn-default" data-dismiss="modal">Fechar</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>

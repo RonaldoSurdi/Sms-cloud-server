@@ -1,0 +1,90 @@
+pt-BR:
+  models_and_attributes: &models_and_attributes
+    # models:
+    #   event:
+    #     one: Evento
+    #     other: Eventos
+    # attributes:
+    #     event:
+    #       name: Nome
+  tipo_pessoa:
+    fisica: "Física"
+    juridica: "Jurídica"
+  tipo_plano:
+    licenca: "Pacote de SMS para Licença"
+    adicional: "Pacote de SMS Adicional"
+    avulso: "Pacote de SMS Avulso"
+  tipo_licenca:
+    nova: "Licença Nova"
+    renovacao: "Liçenca de Renovação"
+  tipo_licenca_pluralize:
+    nova: "Licenças Novas"
+    renovacao: "Liçencas de Renovação"
+  funcoes:
+    acoes:
+      edit: Alteração
+      update: Alteração
+      create: Criação
+      destroy: Exclusão
+      read: Leitura
+  errors:
+    messages:
+      mac_address: "MAC Address inválido"
+  actions:
+    new: Inserção
+    edit: Edição
+    show: Visualização
+    update: Edição
+    create: Inserção
+    destroy: Exclusão
+  models:
+    user: "Usuário"
+    users: "Usuários"
+    administrator: "Administrador"
+    Administrator: "Administradores"
+    administrators: "Administradores"
+    role: "Permissão"
+    Role: "Permissões"
+    roles: "Permissões"
+    representative: "Representante"
+    Representative: "Representantes"
+    representatives: "Representantes"
+    customer: "Cliente"
+    Customer: "Clientes"
+    customers: "Clientes"
+    our_customer: "Nosso Cliente"
+    OurCustomer: "Nossos Clientes"
+    our_customers: "Nossos Clientes"
+    plan: "Pacote de SMS"
+    Plan: "Pacotes de SMS"
+    plans: "Pacotes de SMS"
+    license: "Licença"
+    License: "Licenças"
+    licenses: "Licenças"
+    license_movement: "Venda de Licença"
+    LicenseMovement: "Venda de Licenças"
+    license_movements: "Venda de Licenças"
+    contact: "Contato"
+    Contact: "Contato"
+    contacts: "Contatos"
+    contact_group: "Grupo"
+    ContactGroup: "Grupo"
+    contact_groups: "Grupos"
+  activerecord:
+    <<: *models_and_attributes
+    attributes:
+      representative:
+        email: "E-Mail"
+        cnpj: "CNPJ"
+        confirmation_token: "Passe de confirmação"
+      customer:
+        email: "E-Mail"
+        cpf_cnpj: "CPF/CNPJ"
+        confirmation_token: "Passe de confirmação"
+
+  activemodel:
+    <<: *models_and_attributes
+
+  devise:
+    confirmations:
+      representative_confirmed: "Sua conta foi confirmada com sucesso. Aguarde a aprovação da SendMy para que você possa acessar o painel de representantes. Um e-mail será enviado para você com o link de acesso, assim que a sua conta for confirmada."

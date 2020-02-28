@@ -1,0 +1,29 @@
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <%= link_to "SendMy", administrator_root_path, class: "navbar-brand" %>
+    <a class="toggle-nav btn pull-left" href="#">
+      <i class="icon-reorder"></i>
+    </a>
+
+    <ul class="nav">
+      <li class="dropdown dark user-menu">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="user-name"><%= current_administrator.name %></span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to edit_profile_administrator_path("meu_perfil") do %>
+              <i class="icon-cog"></i> Alterar Dados
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_administrator_session_path, method: "delete", data: {confirm: "Deseja realmente sair?"} do %>
+              <i class="icon-signout"></i> Sair
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>

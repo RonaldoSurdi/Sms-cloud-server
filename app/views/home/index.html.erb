@@ -1,0 +1,159 @@
+<section class="welcome">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <div class="col-xs-8">
+            <h2>Bem-vindo ao centro inteligente de envio de mensagens via SMS SendMy.</h2>
+          </div>
+        </div>
+        <div class="autenticacao">
+          <% if customer_signed_in? %>
+          <div class="row logado">
+            <div class="col-xs-12">
+              <p>
+                <%= link_to "Sair", destroy_customer_session_path, method: "delete", data: {confirm: "Deseja realmente sair?"}, class: "btn custom-purple-button" %>
+                &nbsp;&nbsp;
+                <%= link_to "Ir ao Painel", current_customer.possui_saldo? ? painel_index_path : painel_opcoes_index_path, class: "btn custom-purple-button" %>
+              </p>
+              <br/>
+              <h5><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;<%= current_user.nome %>&nbsp;&nbsp;&nbsp;</h5>
+              <h5><i class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Saldo/SMS:&nbsp;&nbsp;<big class="saldo" ng-bind="<%= current_customer.try(:saldo_sms) || 0 %> | number"></big></h5>
+              <br>
+            </div>
+          </div>
+          <% else %>
+          <div class="row login">
+            <div class="col-xs-6">
+              <% messages %>
+              <h3 class="verde-sendmy">Acesse sua conta!</h3>
+              <%= form_tag(customer_session_path, class: "form-horizontal form-sendmy") do %>
+                <div class="form-group">
+                  <label for="email" class="col-xs-12 control-label">E-mail</label>
+                  <div class="col-xs-12">
+                    <input type="email" class="form-control input-sm" name="customer[email]" id="customer_email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="senha" class="col-xs-12 control-label">Senha</label>
+                  <div class="col-xs-12">
+                    <input type="password" class="form-control input-sm" name="customer[password]" id="customer_password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-4">
+                    <button type="submit" name="commit" class="btn btn-xs btn-sendmy">ENTRAR</button>
+                  </div>
+                  <div class="col-xs-8">
+                    <%= link_to "Esqueci minha senha", new_customer_password_path, class: "verde-sendmy esqueci-minha-senha" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+          <div class="row">
+            <div class="col-xs-12 links-uteis">
+              <p><%=link_to "QUEM SOMOS", quem_somos_path %></p>
+              <p><%=link_to "COMPRAR PACOTES", representantes_path %></p>
+              <p><%=link_to "SEJA UM REPRESENTANTE", new_public_representative_path %></p>
+              <p><%=link_to "NOSSOS REPRESENTANTES", representantes_path %></p>
+              <p><%=link_to "PAINEL DO REPRESENTANTE", new_representative_session_path %></p>
+              <p><%=link_to "FALE CONOSCO", fale_conosco_index_path %></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="co-xs-12 seja-representante">
+              <div class="row">
+                <div class="col-xs-5">
+                  <%= image_tag "seja-representante.png", class: "img-responsive img-seja-representante" %>
+                </div>
+                <div class="col-xs-7">
+                  <h3 class="text-center">
+                    Aumente os <big>lucros</big>
+                    <br>
+                    <small>da sua</small> <big>empresa</big>
+                    <br>
+                    <small>seja nosso</small>
+                    <big>representante</big>
+                  </h3>
+                  <p class="text-right"><strong><%=link_to "Clique aqui", new_public_representative_path, class: "verde-sendmy" %></strong></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <%= image_tag "cloud-smartphone.png", title: "", alt: "Sistema de envio de SMS", class: "img-responsive cloud-smartphone" %>
+        <%= image_tag "marketing-resultados.png", title: "", alt: "Maketing de Resultados", class: "img-responsive marketing-resultados" %>
+        <iframe width="365" height="212" class="marketing-resultados-video" src="https://www.youtube.com/embed/MUhDXOxAC0c" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="banner">
+
+</section>
+<section class="customer-space bg-pattern">
+  <div class="container">
+    <div class="bg-effects"></div>
+    <div class="row test-dev">
+      <div class="col-xs-2 col-xs-offset-1">
+        <%= image_tag "icon-teste-sms.png", title: "", alt: "Teste o SendMy", class: "img-responsive" %>
+      </div>
+      <div class="col-xs-3">
+        <h4>COMECE A ENVIAR SMS</h4>
+        <h3>Cadastrando-se!</h3>
+        <h5>Veja as soluções completas para melhorar o relacionamento empresa/cliente.</h5>
+        <strong><%= link_to "Clique aqui", new_public_customer_path, class: "verde-sendmy" %></strong>
+      </div>
+      <div class="col-xs-2">
+        <%= image_tag "icon-cart.png", title: "", alt: "Soluções personalizadas", class: "img-responsive" %>
+      </div>
+      <div class="col-xs-4">
+        <h4>COMPRAR PACOTES</h4>
+        <h3>Soluções personalizadas</h3>
+        <h5>Confira os valores e pacotes oferecidos. Temos a solução certa para você e sua empresa.</h5>
+        <strong><%= link_to "Saiba mais", representantes_path, class: "verde-sendmy" %></strong>
+      </div>
+    </div>
+
+    <% if @our_customers.size > 0 %>
+      <div class="clientes border-none">
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>NOSSOS CLIENTES</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <% @our_customers.each do |customer| %>
+            <div class="col-xs-3">
+              <div class="cliente">
+                <table>
+                  <tr valign="middle">
+                    <td align="center">
+                      <%=link_to customer.url, target: "_blank" do %>
+                      <%= image_tag customer.logo.url(:thumb), alt: customer.descricao, title: customer.descricao %>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <% if @our_customers.size >= 4 %>
+          <div class="row">
+            <div class="col-xs-12 text-right m-t-15">
+              <strong><%= link_to 'Ver todos', nossos_clientes_path, class: 'verde-sendmy' %></strong>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

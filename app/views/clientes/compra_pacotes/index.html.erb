@@ -1,0 +1,81 @@
+<%= content_for :angular_controller, "CompraPacoteController" %>
+
+<br/>
+<section class="cliente-comprar-pacotes" ng-init="pacotes = <%= serialize_json_angular @plans %>">
+  <div class="container">
+    <div class="box">
+      <div class="box-header">
+        <div class="col-xs-9">
+          <%= link_to "Painel de Opções", painel_opcoes_index_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <span>
+            Comprar Pacotes
+            <%= current_customer.possui_licenca_atual? ? "Adicionais" : "Avulsos" %>
+          </span>
+        </div>
+      </div>
+
+      <div class="box-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <%= form_tag compra_pacotes_path do %>
+              <div class="col-xs-6" ng-repeat="pacote in pacotes track by $index">
+                <div class="box box-nomargin box-no-shadow dark-purple-bordered-box">
+                  <div class="box-header box-header-small dark-purple-background">
+                    <div class="title">
+                      <strong>{{pacote.descricao}}</strong>
+                    </div>
+                  </div>
+                  <div class="box-content box-padding">
+                    <div class="row">
+                      <h4 class="text-center">
+                        <div class="col-xs-6 purple-right-border">
+                          <strong>SMS's</strong><br/>
+                          <span class="text-purple">
+                            &lt; {{pacote.quantidade_sms}} &gt;
+                          </span>
+                        </div>
+                        <div class="col-xs-6">
+                          <strong>Valor</strong><br/>
+                          <span class="text-purple">
+                            &lt; {{pacote.valor_total | currency}} &gt;
+                          </span>
+                        </div>
+                      </h4>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="box-toolbox box-toolbox-bottom">
+                          <button type="submit" class="btn btn-default btn-block" ng-click="enviarForm($event, pacote.id)">
+                          <i class="icon-shopping-cart"></i>
+                            &nbsp;
+                            Comprar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <input type="hidden" name="plan_id" ng-value="pacoteSelecionadoId">
+            <% end %>
+          </div>
+        </div>
+
+        <br/>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= link_to painel_opcoes_index_path, class: "btn btn-default col-xs-12" do %>
+              <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+              <strong>VOLTAR</strong>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+</section>

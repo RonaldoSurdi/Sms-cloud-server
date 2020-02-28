@@ -1,0 +1,70 @@
+<section class="fale_conosco">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <br/>
+        <h1>Fale Conosco</h1>
+        <br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= messages %>
+
+        <%= form_tag fale_conosco_index_path do %>
+          <div class="form-inputs">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group string required nome">
+                  <label class="string required control-label" for="nome">
+                    <abbr title="requerido">*</abbr>&nbsp;
+                    Nome
+                  </label>
+                  <%= text_field_tag "contato[nome]", "", required: true, class: "string required form-control", autofocus: true %>
+                </div>
+                <div class="form-group string required email">
+                  <label class="string required control-label" for="email">
+                    <abbr title="requerido">*</abbr>&nbsp;
+                    E-Mail
+                  </label>
+                  <%= text_field_tag "contato[email]", "", required: true, class: "string required form-control" %>
+                </div>
+                <div class="form-group string telefone">
+                  <label class="string control-label" for="telefone">
+                    Telefone
+                  </label>
+                  <%= text_field_tag "contato[telefone]", "", class: "string form-control", "data-mascara" => "telefone" %>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group text required mensagem">
+                  <label class="text required control-label" for="mensagem">
+                    <abbr title="requerido">*</abbr>&nbsp;
+                    Mensagem
+                  </label>
+                  <%= text_area_tag "contato[mensagem]", "", required: true, class: "text required form-control", rows: 8 %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <br/>
+              <div class="col-xs-4">
+                <%= link_to root_path, class: "btn btn-default col-xs-12" do %>
+                  <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                  <strong>VOLTAR</strong>
+                <% end %>
+              </div>
+              <div class="col-xs-4 col-xs-offset-4">
+                <button type="submit" class="btn btn-success col-xs-12">
+                  <strong>ENVIAR</strong>&nbsp;&nbsp;
+                  <i class="icon-mail-forward"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>

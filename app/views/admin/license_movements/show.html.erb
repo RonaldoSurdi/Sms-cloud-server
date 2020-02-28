@@ -1,0 +1,78 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span>Detalhes da Venda</span>
+          </h1>
+
+          <%= link_to license_movements_path, class: "btn btn-white pull-right btn-action spacing" do %>
+            <i class="icon-arrow-left"></i><br>Voltar
+          <% end %>
+
+          <% unless @license_movement.confirmada? %>
+            <%= link_to license_movement_path(@license_movement), method: :delete, data: {confirm: "Confirma exclusão?"}, class: "btn btn-danger pull-right btn-action spacing" do %>
+              <i class="icon-trash"></i><br>Excluir
+            <% end if can?(:destroy, LicenseMovement) %>
+
+            <%= link_to license_movement_path(@license_movement), class: "btn pull-right btn-action btn-success",
+                                            method: :patch, data: { confirm: "Você tem certeza que deseja confirmar essa venda?" } do %>
+              <i class="icon-ok"></i><br>Confirmar Pagamento
+            <% end if can?(:update, LicenseMovement) %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.license_movement.representative_id") %></label>
+          <div class="col-md-10">
+            <a href="<%= representative_path(@license_movement.representative) %>">
+              <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                <%= @license_movement.representative.nome_fantasia %>
+              </label>
+            </a>
+          </div>
+        </div>
+
+        <% if @license_movement.license %>
+          <div class="row">
+            <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.license_movement.license_id") %></label>
+            <div class="col-md-10">
+              <a href="<%= license_path(@license_movement.license) %>">
+                <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                  <%= @license_movement.licenca_descricao %>
+                </label>
+              </a>
+            </div>
+          </div>
+          <br/>
+        <% else %>
+          <br/>
+          <%= show_input_tag(@license_movement, :licenca_descricao) %>
+        <% end %>
+
+        <%= show_input_tag(@license_movement, :licenca_tipo, t(@license_movement.licenca_tipo, scope: "tipo_licenca")) %>
+
+        <% [:licenca_valor_unitario, :licenca_valor_sugerido].each do |attribute| %>
+          <%= show_input_tag(@license_movement, attribute, @license_movement.try(attribute).try(:real_contabil)) %>
+        <% end %>
+
+        <% [:created_at, :confirmado_pagamento_em].each do |attribute| %>
+          <%= show_input_tag(@license_movement, attribute, @license_movement.try(attribute).try(:to_s_br) || "Não foi confirmado ainda.") %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

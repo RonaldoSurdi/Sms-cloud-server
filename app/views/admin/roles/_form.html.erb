@@ -1,0 +1,29 @@
+<%= simple_form_for(@role) do |f| %>
+
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :description, input_html: { autofocus: true } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 extended-form-control">
+      <%= f.simple_fields_for :permissions do |ff| %>
+        <div class="row box-content col-md-6" style="min-height: 170px;">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-white btn-xs pull-right desmarcar-todas-acoes">Desmarcar todos</button>
+            <button type="button" class="btn btn-white btn-xs pull-right marcar-todas-acoes">Marcar todos</button>
+            <%= ff.input :subject, as: :hidden if ff.object.new_record? %>
+            <%= ff.input :actions,
+              as: :check_boxes,
+              label_method: ->(action_label) { t(action_label, scope: "simple_form.labels.role.actions") },
+              label: t(ff.object.subject, scope: "models"),
+              collection: authorizable_actions_of(ff.object.subject) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

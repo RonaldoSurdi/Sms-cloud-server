@@ -1,0 +1,12 @@
+//= require angular/angular
+//= require angular/services
+//= require angular/app
+//= require public/angular/controllers/RepresentantesController
+//= require public/angular/controllers/PainelPrincipalController
+//= require public/angular/controllers/ContactController
+//= require public/angular/controllers/FormContactController
+//= require public/angular/controllers/ContactGroupController
+//= require public/angular/controllers/FormContactGroupController
+//= require public/angular/controllers/EnvioSmsController
+//= require public/angular/controllers/RelatorioController
+//= require public/angular/controllers/CompraPacoteController

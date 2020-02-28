@@ -1,0 +1,29 @@
+<%= actions(:license) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <div class="row">
+          <label class="col-md-2 control-label text-right label-show"><%= t("simple_form.labels.license.plan_descricao") %></label>
+          <div class="col-md-10">
+            <a href="<%= plan_path(@license.plan) %>">
+              <label class="form-control auto-height text-normal input-xs cursor-pointer">
+                <%= @license.plan.descricao %>
+              </label>
+            </a>
+          </div>
+        </div>
+        <br/>
+
+        <%= show_input_tag(@license, :descricao) %>
+        <%= show_input_tag(@license, :tipo, t(@license.tipo, scope: "tipo_licenca")) %>
+        <%= show_input_tag(@license, :valor_unitario, @license.valor_unitario.real_contabil) %>
+        <%= show_input_tag(@license, :valor_sugerido, @license.valor_sugerido.real_contabil) %>
+
+      </div>
+    </div>
+  </div>
+</div>

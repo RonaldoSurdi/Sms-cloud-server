@@ -1,0 +1,168 @@
+<% content_for :angular_controller, "RelatorioController" %>
+
+<section ng-init="init();">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+                <i class="icon-chevron-right"></i>&nbsp;
+
+                <%= link_to "Relatórios", relatorios_path, class: "link-header" %>&nbsp;
+                <i class="icon-chevron-right"></i>&nbsp;
+
+                <span>Transação #<%= @transacao.grupo %></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="box-content">
+
+            <div class="row show">
+              <label class="col-xs-2 control-label text-right label-show">Data/Hora da Criação</label>
+              <div class="col-md-10">
+                <label class="form-control auto-height text-normal input-xs"><%= @transacao.data_criacao.in_time_zone.to_s_br %></label>
+              </div>
+            </div>
+
+            <% if @mensagens.first.schedule.present? %>
+              <div class="row show">
+                <label class="col-xs-2 control-label text-right label-show">Envio Agendado Para</label>
+                <div class="col-md-10">
+                  <label class="form-control auto-height text-normal input-xs"><%= @mensagens.first.schedule.try(:in_time_zone).try(:to_s_br) %></label>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="row show">
+              <label class="col-xs-2 control-label text-right label-show">Mensagem</label>
+              <div class="col-md-10">
+                <label class="form-control text-normal input-xs label-for-textarea"><%= @mensagens.first.message %></label>
+              </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <strong>Progresso do Envio</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="progress">
+                  <div role="progressbar" class="progress-bar progress-bar-purple"
+                        style="width: <%= percent = @transacao.porcentagem_enviados %>%"></div>
+                  <span class="percent-display percent-display-show"><%= percent %>%</span>
+                </div>
+              </div>
+            </div>
+
+            <hr class="hr-purple"/>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="col-xs-6">
+                  <div class="box-content box-statistic">
+                    <h3 class="title">
+                      <span class="<%= cor_texto_para_status(MessageStatus::PENDING) %>"><%= @transacao.quantidade_pendente %></span>
+                    </h3>
+                    <small>Pendentes</small>
+                    <div class="align-right <%= cor_texto_e_icone_para_status(MessageStatus::PENDING) %>"></div>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <div class="box-content box-statistic">
+                    <h3 class="title">
+                      <span class="<%= cor_texto_para_status(MessageStatus::SENDING) %>"><%= @transacao.quantidade_enviando %></span>
+                    </h3>
+                    <small>Enviando</small>
+                    <div class="align-right <%= cor_texto_e_icone_para_status(MessageStatus::SENDING) %>"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="col-xs-6">
+                  <div class="box-content box-statistic">
+                    <h3 class="title">
+                      <span class="<%= cor_texto_para_status(MessageStatus::SUCCESS) %>"><%= @transacao.quantidade_sucesso %></span>
+                    </h3>
+                    <small>Sucesso</small>
+                    <div class="align-right <%= cor_texto_e_icone_para_status(MessageStatus::SUCCESS) %>"></div>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <div class="box-content box-statistic">
+                    <h3 class="title">
+                      <span class="<%= cor_texto_para_status(MessageStatus::ERROR) %>"><%= @transacao.quantidade_erro %></span>
+                    </h3>
+                    <small>Erro</small>
+                    <div class="align-right <%= cor_texto_e_icone_para_status(MessageStatus::ERROR) %>"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br/>
+
+            <div class="box-content max-height-box">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-xs-1"></th>
+                    <th class="col-xs-6">Telefone</th>
+                    <th class="col-xs-5">Data/Hora do Envio</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @mensagens.each do |mensagem| %>
+                    <tr>
+                      <td class="text-center">
+                        <i class="<%= cor_texto_e_icone_para_status(mensagem.status) %>"></i>
+                      </td>
+                      <td>
+                        <%= mensagem.formatted_to %>
+                        <span class="text-muted">
+                          <%= "<#{mensagem.contato_nome}>" if mensagem.contato_nome %>
+                        </span>
+                      </td>
+                      <td class="<%= mensagem.date_time_sent ? '' : cor_texto_para_status(mensagem.status) %>">
+                        <%= mensagem.date_time_sent ? mensagem.date_time_sent.to_s_br : "Não Enviada" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 text-right text-muted padding-top">
+                <span>
+                  <strong><%= @transacao.quantidade_total %></strong>
+                  <%= @transacao.quantidade_total == 1 ? "SMS Cadastrado" : "SMS's Cadastrados" %>
+                </span>
+              </div>
+            </div>
+
+            <div class="row align-end">
+              <div class="col-xs-4">
+                <%= link_to relatorios_path, class: "btn btn-default col-xs-12" do %>
+                  <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                  <strong>VOLTAR</strong>
+                <% end %>
+              </div>
+
+              <div class="col-xs-8 text-right">
+                Essa página será recarregada em <strong>{{contador}}</strong> segundos.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

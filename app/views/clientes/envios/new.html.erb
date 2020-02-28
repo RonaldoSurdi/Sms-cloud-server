@@ -1,0 +1,299 @@
+<% content_for :angular_controller, "EnvioSmsController" %>
+
+<div class="container" ng-init="saldo = <%= current_customer.saldo_sms %>; maximoCaracteres = <%= Message::MAX_CHARACTERES %>">
+  <div class="row form">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header">
+          <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <span>Envio de SMS</span>
+        </div>
+
+        <div class="box-content">
+          <%= messages %>
+
+          <%= simple_form_for(@mensagem, url: envios_path, html: { "ng-submit" => "verificarSaldo($event)" }) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+              <%= f.input :message, as: :text, autofocus: true,
+                      hint: raw("<strong>{{contador = maximoCaracteres - mensagem.length}}</strong> {{(contador ===  1 ? ' caractere restante' : ' caracteres restantes')}}"),
+                      input_html: {class: "autosize", "ng-model" => "mensagem", maxlength: "{{maximoCaracteres}}"} %>
+
+              <div class="accordion panel-group" id="accordion">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-agendamento">
+                      Agendar envio dos SMS's
+                    </a>
+                  </div>
+                  <div class="panel-collapse collapse" id="collapse-agendamento">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-xs-12">
+
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <div class="form-group radio_buttons customer_tipo_pessoa">
+                                <span class="radio">
+                                  <label for="envio_enviar_agora">
+                                    <input class="radio_buttons" id="envio_enviar_agora" name="message[agendamento]" type="radio" ng-value="false" ng-model="agendarEnvio" ng-checked="!agendarEnvio">
+                                    Enviar SMS's ao confirmar
+                                  </label>
+                                </span>
+
+                                <span class="radio">
+                                  <label for="envio_agendar_envio">
+                                    <input class="radio_buttons" id="envio_agendar_envio" name="message[agendamento]" type="radio" ng-value="true" ng-model="agendarEnvio">
+                                    Agendar envio dos SMS's
+                                  </label>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" ng-show="agendarEnvio">
+                        <div class="col-xs-12">
+                          <%= f.input :schedule, wrapper: :vertical_form_with_horizontal_datetime, start_year: Date.today.year %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="box box-nomargin box-no-shadow">
+                    <div class="box-header box-header-small muted-background box-header-select-contacts">
+                      <div class="col-xs-6">
+                        <span>Contatos/Números Selecionados</span>
+                      </div>
+
+                      <div class="col-xs-6 text-right">
+                        <%= link_to "", id: "selecionar_contatos", class: "btn btn-header" do %>
+                          <i class="icon-check"></i>&nbsp;
+                          <strong>Selecionar Contatos</strong>
+                        <% end %>
+
+                        <%= link_to "", id: "adicionar_numero", class: "btn btn-header" do %>
+                          <i class="icon-phone"></i>&nbsp;
+                          <strong>Adicionar Número</strong>
+                        <% end %>
+                      </div>
+                    </div>
+
+                    <div class="box-content box-selected-contacts">
+                      <p ng-show="contatosAdicionados.length < 1" class="alert alert-info"><i class="icon-info-sign"></i>&nbsp;Nenhum número adicionado.</p>
+
+                      <table class="table table-hover table-striped" ng-show="contatosAdicionados.length > 0">
+                        <thead>
+                          <tr>
+                            <th>Nome</th>
+                            <th>Celular</th>
+                            <th class="only-checkbox remove-selected-group-button text-center" ng-click="removerTodosAdicionados()">&times;</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr ng-repeat="contato in contatosAdicionados">
+                            <td ng-show="false">
+                              <input type="text" name="message[cellphones][]" ng-value="contato.celular">
+                              <input type="text" name="message[contatos_nomes][]" ng-value="contato.nome">
+                            </td>
+                            <td>{{contato.nome || "Sem nome cadastrado"}}</td>
+                            <td>{{formatarTelefone(contato.celular)}}</td>
+                            <td class="remove-selected-group-button text-center" ng-click="removerDosAdicionados($index)">&times;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="text-muted text-right">
+                    <span>
+                      <strong>{{contatosAdicionados.length}}</strong>
+                      {{contatosAdicionados.length === 1 ? " Número Adicionado" : " Números Adicionados"}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+              <div class="row">
+                <div class="col-sm-4">
+                  <%= link_to painel_index_path, class: "btn btn-default col-sm-12" do %>
+                    <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                    <strong>VOLTAR</strong>
+                  <% end %>
+                </div>
+                <div class="col-sm-offset-4 col-sm-4">
+                  <button type="submit" class="btn btn-success col-sm-12" ng-disabled="!mensagem || contatosAdicionados.length < 1"
+                            data-confirm="Você tem certeza que deseja enviar a mensagem para os números selecionados?">
+                    <strong>CONFIRMAR</strong>&nbsp;&nbsp;
+                    <i class="icon-ok"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selecionar_contatos_envio_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">
+          Selecionar Contatos&nbsp;&nbsp;&nbsp;
+          <i class="icon-spinner icon-spin" ng-show="carregandoModal"></i>
+        </h4>
+      </div>
+
+      <div class="modal-body">
+        <form action="#">
+          <div class="form-inputs">
+
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label class="control-label">Filtrar por Nome/Celular</label>
+                  <div class="input-group">
+                    <%= text_field_tag "filtro[texto]", "", class: "form-control", "ng-model" => "filtroTexto" %>
+                    <span class="input-group-addon">
+                      <i class="icon-search"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group select">
+                  <label class="control-label">Filtrar por Grupos</label>
+                  <%= select_tag "filtro[grupo]", options_from_collection_for_select(@grupos, :id, :descricao), include_blank: true,
+                      class: "select optional select2 form-control", "ng-model" => "filtroGrupo" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="form-group select">
+                  <label class="control-label">Filtrar por Sexo</label>
+                  <%= select_tag "sexos", options_from_collection_for_select(Contact.sexos, :first, -> (item) { item.first.titleize }),
+                        include_blank: true, class: "select form-control", "ng-model" => "filtroSexo" %>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <label class="control-label">Filtrar mês do aniversário</label>
+                  <%= select_tag "filtro[aniversario_mes]", options_from_collection_for_select(@meses, :last, :first), include_blank: true,
+                        class: "select optional form-control", "ng-model" => "filtroAniversarioMes" %>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <label class="control-label">Filtrar dia do aniversário</label>
+                <%= select_tag "filtro[aniversario_dia]", options_from_collection_for_select([], :last, :first), include_blank: true,
+                      class: "select optional form-control", "ng-model" => "filtroAniversarioDia", disabled: true %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 text-right">
+                <button type="button" class="btn btn-default btn-sm" ng-click="limparFiltros()">Limpar Filtros</button>
+              </div>
+            </div>
+
+            <hr class="hr-black"/>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="fixed-table-height-md fixed-table-with-overflow-auto">
+                  <table class="table table-bordered table-hover table-striped">
+                    <thead ng-show="contatosListados.length > 0">
+                      <tr>
+                        <th class="only-checkbox">
+                          <%= check_box_tag "adicionar_todos", "", false, "ng-model" => "marcarTodos", "ng-change" => "alternarSelecaoTodos(contatosListados)" %>
+                        </th>
+                        <th>Nome</th>
+                        <th>Celular</th>
+                      </tr>
+                    </thead>
+                    <tbody class="contacts-table-body">
+                      <tr ng-hide="contatosListados.length > 0" class="text-center">
+                        <td>Nenhum contato para selecionar</td>
+                      </tr>
+                      <tr ng-repeat="contato in contatosListados = (contatos |
+                                                  filter:filtroJaAdicionados |
+                                                  filter:{groups_ids: filtroGrupo} |
+                                                  filter:{sexo: filtroSexo} | filter:filtroTexto |
+                                                  filter:{mesAniversario: filtroAniversarioMes, diaAniversario: filtroAniversarioDia}) track by $index">
+                        <td class="only-checkbox">
+                          <input type="checkbox" ng-model="contato.selecionado" ng-attr-id="{{'contato_listado_' + $index}}">
+                        </td>
+                        <td>{{contato.nome}}</td>
+                        <td>{{formatarTelefone(contato.celular)}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 text-right text-muted padding-top">
+                <span>
+                  <strong>{{contatosListados.length}}</strong>
+                  {{(contatosListados.length ===  1 ? 'Contato Listado' : 'Contatos Listados')}}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-primary" ng-click="adicionarContatos()" ng-disabled="contatosListados.length < 1">Adicionar</a>
+        <a class="btn btn-default" data-dismiss="modal">Concluir</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adicionar_numero_envio_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">
+          Adicionar um número não pertencente à contatos
+        </h4>
+      </div>
+      <form action="#" name="formNumero">
+
+        <div class="modal-body">
+          <div class="form-inputs">
+            <div class="row">
+              <div class="col-xs-12">
+                <%= text_field_tag "numero_avulso", "", class: "text form-control", "ng-model" => "numeroAvulso",
+                                    "ng-enter" => "adicionarNumeroAvulso()", "ui-br-phone-number" => "" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn btn-primary" ng-click="adicionarNumeroAvulso()" ng-disabled="!numeroAvulso || !formNumero.numero_avulso.$valid">Adicionar</a>
+          <a class="btn btn-default" data-dismiss="modal">Concluir</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

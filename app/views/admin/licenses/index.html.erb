@@ -1,0 +1,65 @@
+<% content_for :actions, actions(:license) %>
+<% content_for :angular_controller, "LicenseController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>; canEdit=<%= can?(:update, License) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por Descrição da Licença ou Descrição do Plano", autofocus: true, placeholder: "Pesquise por Descrição da Licença ou do Plano",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="licenses.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="licenses">
+    <thead>
+      <tr>
+        <th ng-click="order('licenses.descricao')" class="{{orderClass('licenses.descricao')}}"><%= t('simple_form.labels.license.descricao') %></th>
+        <th ng-click="order('plans.descricao')" class="{{orderClass('plans.descricao')}}"><%= t('simple_form.labels.license.plan_descricao') %></th>
+        <th ng-click="order('licenses.tipo')" class="{{orderClass('licenses.tipo')}}"><%= t('simple_form.labels.license.tipo') %></th>
+        <th ng-click="order('licenses.valor_unitario')" class="{{orderClass('licenses.valor_unitario')}}"><%= t('simple_form.labels.license.valor_unitario') %></th>
+        <th ng-click="order('licenses.valor_sugerido')" class="{{orderClass('licenses.valor_sugerido')}}"><%= t('simple_form.labels.license.valor_sugerido') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{license.show_html_url}}" ng-repeat="license in licenses track by license.id">
+        <td>{{license.descricao}}</td>
+        <td>{{license.plans['descricao']}}</td>
+        <td>{{license.tipo}}</td>
+        <td>{{license.valor_unitario}}</td>
+        <td>{{license.valor_sugerido}}</td>
+        <td class="text-right">
+          <a href="{{license.edit_html_url}}" class="btn btn-success btn-xs" ng-if="canEdit">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="licenses"
+    url="'<%= licenses_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

@@ -1,0 +1,143 @@
+<% content_for :class_body, "customers" %>
+
+<section class="perfil-cliente bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <br/>
+
+        <%= messages %>
+
+        <%= simple_form_for(@customer, url: profile_customer_path) do |f| %>
+
+          <div class="box">
+            <div class="box-header">
+              <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+              <i class="icon-chevron-right"></i>&nbsp;
+
+              <span>Perfil</span>
+            </div>
+
+            <div class="box-content">
+              <div class="form-inputs">
+                <legend>Informações Gerais</legend>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group string required customer_tipo_pessoa">
+                      <label class="string required control-label" for="customer_tipo_pessoa"><abbr title="requerido">*</abbr> Tipo de Pessoa</label>
+                      <%= text_field_tag "customer_tipo_pessoa", t(@customer.tipo_pessoa, scope: 'tipo_pessoa'), readonly: true, class: "string required form-control" %>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group string required customer_representative_nome_fantasia">
+                      <label class="string required control-label" for="customer_representative_nome_fantasia"><abbr title="requerido">*</abbr> Representante</label>
+                      <%= text_field_tag "customer_representative_nome_fantasia", @customer.representative.nome_fantasia, readonly: true, class: "string required form-control" %>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <% if @customer.fisica? %>
+                      <%= f.input :cpf_cnpj, readonly: true, input_html: {"data-mascara" => "cpf"} %>
+                    <% else %>
+                      <%= f.input :cpf_cnpj, readonly: true, input_html: {"data-mascara" => "cnpj"} %>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-<%= @customer.fisica? ? '12' : '6' %>">
+                    <%= f.input :nome, input_html: { autofocus: true } %>
+                  </div>
+
+                  <% if @customer.juridica? %>
+                    <div class="col-sm-6">
+                      <%= f.input :razao_social, required: true %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <%= f.input :telefone, input_html: {"data-mascara" => "telefone"} %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= f.input :celular, required: false, input_html: {"data-mascara" => "telefone"} %>
+                  </div>
+                </div>
+
+                <legend>Informações de Acesso</legend>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <%= f.input :email, required: true %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <%= f.input :current_password, placeholder: "Deixe em branco para não alterar" %>
+                  </div>
+                  <div class="col-sm-4">
+                    <%= f.input :password %>
+                  </div>
+                  <div class="col-sm-4">
+                    <%= f.input :password_confirmation %>
+                  </div>
+                </div>
+
+                <legend>Localização</legend>
+
+                <%= f.simple_fields_for :endereco do |ff| %>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <%= ff.input :cep, input_html: {"data-mascara" => "cep"}, hint: raw('<a href="http://www.buscacep.correios.com.br/" target="_blank" tabindex="-1">Não sabe o seu cep?</a>') %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= ff.input :uf, collection: UF.all.collect { |k,v| [v,k] }, required: true, disabled: true %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <%= ff.input :cidade, required: true, readonly: true %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= ff.input :logradouro %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <%= ff.input :bairro %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= ff.input :complemento, required: false %>
+                    </div>
+                  </div>
+
+                <% end %>
+
+                <br/>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <%= link_to current_customer.possui_saldo? ? painel_index_path : painel_opcoes_index_path, class: "btn btn-default col-sm-12" do %>
+                      <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                      <strong>IR PARA O PAINEL</strong>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-offset-4 col-sm-4">
+                    <button type="submit" class="btn btn-success col-sm-12">
+                      <strong>ALTERAR</strong>&nbsp;&nbsp;
+                      <i class="icon-ok"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

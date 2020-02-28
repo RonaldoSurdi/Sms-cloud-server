@@ -1,0 +1,32 @@
+<%= simple_form_for(@plan) do |f| %>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-10">
+        <%= f.input :descricao, input_html: {autofocus: true} %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :tipo, collection: Plan.tipos, label_method: ->(action_label) { t(action_label.first, scope: "tipo_plano") }, value_method: :first, include_blank: false %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :quantidade_sms, as: :integer %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :valor_total, as: :string, input_html: { value: @plan.valor_total.reais_contabeis, "data-mascara" => "dinheiro" } %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :valor_unitario, as: :string, disabled: true %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit "", class: "hide" %>
+<% end %>

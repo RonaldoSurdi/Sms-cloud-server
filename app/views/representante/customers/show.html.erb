@@ -1,0 +1,75 @@
+<div class="row" id="affix-actions">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h1 class="pull-left">
+            <span><%= raw title(Customer) %></span>
+          </h1>
+
+          <%= link_to representative_customers_path, class: "btn btn-white pull-right btn-action spacing" do %>
+            <i class="icon-arrow-left"></i><br>Voltar
+          <% end if show_action(Customer, :back) %>
+
+          <%= link_to new_public_customer_path(current_user.representante_principal? ? {} : { representative_id: current_user.id }),
+                class: "btn pull-right btn-action btn-success", target: :_blank do %>
+            <i class="icon-plus"></i><br>Novo Cliente
+          <% end %>
+
+          <% if @customer.pode_comprar_licenca? %>
+            <%= link_to sale_representative_customers_path(customer_id: @customer.id), class: "btn btn-success pull-right btn-action spacing" do %>
+              <i class="icon-money"></i><br>Vender Licenças
+            <% end %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <div class="tabbable">
+
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#customer" data-toggle="tab">
+              <i class="icon-user"></i>
+              Cliente
+            </a>
+          </li>
+          <li>
+            <a href="#license_movements_history" data-toggle="tab">
+              <i class="icon-list-ul"></i>
+              Histórico de Licenças
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="customer" class="tab-pane active">
+            <%= messages %>
+
+              <%= show_input_tag(@customer, :tipo_pessoa, t(@customer.tipo_pessoa, scope: :tipo_pessoa)) %>
+
+              <% [:nome, :razao_social, :cpf_cnpj_formatado, :telefone_formatado, :celular_formatado, :email].each do |attribute| %>
+                <%= show_input_tag(@customer, attribute) %>
+              <% end %>
+
+              <% [:cep_formatado, :cidade, :uf, :logradouro, :bairro, :complemento].each do |attribute| %>
+                <%= show_input_tag(@customer.endereco, attribute) %>
+              <% end %>
+            </div>
+
+            <div id="license_movements_history" class="tab-pane">
+              <%= render partial: "layouts/shared/historico_licencas", locals: { customer: @customer, current_license_id: @current_license_id } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

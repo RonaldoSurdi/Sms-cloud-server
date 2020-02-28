@@ -1,0 +1,17 @@
+<%= actions(:administrator) %>
+
+<div class="row show">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-content">
+        <%= messages %>
+
+        <%= show_input_tag(@administrator, :name) %>
+        <%= show_input_tag(@administrator, :email) %>
+        <%= show_input_tag(@administrator, :last_sign_in_at, @administrator.last_sign_in_at.to_s_br) %>
+        <%= show_input_tag(@administrator, :roles, @administrator.roles.pluck(:description).to_a.join(", ")) %>
+
+      </div>
+    </div>
+  </div>
+</div>

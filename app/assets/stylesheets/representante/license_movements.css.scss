@@ -1,0 +1,30 @@
+input[name="license_movement[license_ids][]"] {
+  position: relative;
+  bottom: -2px;
+}
+
+.pricing-table {
+  .header {
+    height: 110px;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+
+  .price {
+    width: 80% !important;
+    left: 25% !important;
+
+    z-index: 0 !important;
+    overflow: hidden !important;
+    top: 80px !important;
+  }
+
+  .footer.row {
+    padding: 10px 0 0 0;
+    margin: 0;
+  }
+
+  input[type=number] {
+    text-align: center;
+  }
+}

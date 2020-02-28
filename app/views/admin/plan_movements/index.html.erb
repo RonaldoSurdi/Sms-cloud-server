@@ -1,0 +1,115 @@
+<% content_for :actions do %>
+  <div class="row" id="affix-actions">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="page-header">
+            <h1 class="pull-left">
+              <span>Venda de Planos</span>
+            </h1>
+
+            <%= link_to "#", data: {"form-submit" => "[action='#{multiple_destroy_plan_movements_path}']"}, class: "btn btn-danger pull-right btn-action spacing", "ng-show" => "keys(marcados).length > 0" do %>
+              <i class="icon-trash"></i><br>Excluir Solicitações
+            <% end if can?(:destroy, PlanMovement) %>
+
+            <%= link_to "#", class: "btn pull-right btn-action btn-success", data: {"form-submit" => "[action='#{multiple_confirm_plan_movements_path}']"}, "ng-show" => "keys(marcados).length > 0"  do %>
+              <i class="icon-ok"></i><br>Confirmar Pagamentos
+            <% end if can?(:update, PlanMovement) %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :angular_controller, "PlanMovementController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>; canEdit=<%= can?(:update, PlanMovement) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por Descrição do Plano", autofocus: true, placeholder: "Pesquise por Descrição do Plano",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="plan_movements.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="plan_movements">
+    <thead>
+      <tr>
+        <% if (params[:status] == 'aguardando') && (can?(:update, PlanMovement) || can?(:destroy, PlanMovement)) %>
+          <th>
+            <input ng-click="doCheckAll()" ng-model="checkAll" ng-show="plan_movements.length > 0" type="checkbox" class="btn btn-white btn-xs marcar-todos-registros"></input>
+          </th>
+        <% else %>
+          <th ng-click="order('plan_movements.confirmado_pagamento_em')" class="{{orderClass('plan_movements.confirmado_pagamento_em')}} text-center">Status</th>
+        <% end %>
+        <th ng-click="order('customers.nome')" class="{{orderClass('customers.nome')}}">Cliente</th>
+        <th ng-click="order('plan_movements.plano_descricao')" class="{{orderClass('plan_movements.plano_descricao')}}">Descrição</th>
+        <th ng-click="order('plan_movements.plano_tipo')" class="{{orderClass('plan_movements.plano_tipo')}}">Tipo</th>
+        <th ng-click="order('plan_movements.plano_valor_total')" class="{{orderClass('plan_movements.plano_valor_total')}}">Valor</th>
+        <th ng-click="order('plan_movements.quantidade_sms')" class="{{orderClass('plan_movements.quantidade_sms')}}">Quantidade SMS's</th>
+        <th ng-click="order('plan_movements.created_at')" class="{{orderClass('plan_movements.created_at')}}">Solicitada Em</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{plan_movement.show_html_url}}" ng-repeat="plan_movement in plan_movements track by plan_movement.id">
+        <% if (params[:status] == 'aguardando') && (can?(:update, PlanMovement) || can?(:destroy, PlanMovement)) %>
+          <td title="{{plan_movement.status['title']}}" data-no-href>
+            <label for="checkbox_confirmar_{{plan_movement.id}}">
+              <input ng-click="marcarPlan(plan_movement, $event)" ng-model="plan_movement.marcado" type="checkbox"
+                  id="checkbox_confirmar_{{plan_movement.id}}" class="checkbox_confirmar" ng-bind="plan_movement.id">
+            </label>
+          </td>
+        <% else %>
+          <td class="text-center"><i ng-class="plan_movement.status['icon']"></i></td>
+        <% end %>
+        <td>{{plan_movement.cliente_nome}}</td>
+        <td>{{plan_movement.plano_descricao}}</td>
+        <td>{{plan_movement.plano_tipo}}</td>
+        <td>{{plan_movement.plano_valor_total}}</td>
+        <td>{{plan_movement.quantidade_sms}}</td>
+        <td>{{plan_movement.created_at}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= form_tag(multiple_confirm_plan_movements_path, method: :patch) do %>
+    <input type="hidden" class="checked_records" name="checked_records[]" ng-value="key" ng-repeat="key in keys(marcados)">
+    <%= submit_tag "", class: "hide", data: { confirm: "Você tem certeza que deseja confirmar o pagamento dos planos selecionados?" } %>
+  <% end if can?(:update, PlanMovement) %>
+
+  <%= form_tag(multiple_destroy_plan_movements_path, method: :delete) do %>
+    <input type="hidden" class="checked_records" name="checked_records[]" ng-value="key" ng-repeat="key in keys(marcados)">
+    <%= submit_tag "", class: "hide", data: { confirm: "Você tem certeza que deseja excluir as solicitações de compra selecionadas?" } %>
+  <% end if can?(:destroy, PlanMovement) %>
+
+
+  <bgf-pagination
+    collection="plan_movements"
+    url="'<%= plan_movements_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

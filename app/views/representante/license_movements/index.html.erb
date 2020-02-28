@@ -1,0 +1,92 @@
+<% content_for :actions do %>
+  <div class="row" id="affix-actions">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="page-header">
+            <h1 class="pull-left">
+              <span>Licenças Compradas</span>
+            </h1>
+
+            <%= link_to new_representative_license_movement_path, class: "btn btn-success pull-right btn-action spacing" do %>
+              <i class="icon-shopping-cart"></i><br>Comprar Licenças
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :angular_controller, "LicenseMovementController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por Plano de Envio de SMS's", autofocus: true, placeholder: "Pesquise por Descrição da Licença",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="license_movements.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="license_movements">
+    <thead>
+      <tr>
+        <th ng-click="order('license_movements.confirmado_pagamento_em')" class="{{orderClass('license_movements.confirmado_pagamento_em')}} text-center">Status</th>
+        <th ng-click="order('license_movements.licenca_descricao')" class="{{orderClass('license_movements.licenca_descricao')}}"><%= t('simple_form.labels.license_movement.licenca_descricao') %></th>
+        <th ng-click="order('license_movements.licenca_tipo')" class="{{orderClass('license_movements.licenca_tipo')}}"><%= t('simple_form.labels.license_movement.licenca_tipo') %></th>
+        <th ng-click="order('license_movements.licenca_valor_unitario')" class="{{orderClass('license_movements.licenca_valor_unitario')}}"><%= t('simple_form.labels.license_movement.licenca_valor_unitario') %></th>
+        <% if @status == "vendidas" %>
+          <th ng-click="order('license_movements.data_venda_cliente')" class="{{orderClass('license_movements.data_venda_cliente')}}"><%= t('simple_form.labels.license_movement.valor_venda_cliente') %></th>
+          <th ng-click="order('license_movements.data_venda_cliente')" class="{{orderClass('license_movements.data_venda_cliente')}}"><%= t('simple_form.labels.license_movement.data_venda_cliente') %></th>
+        <% else %>
+          <th ng-click="order('license_movements.licenca_valor_sugerido')" class="{{orderClass('license_movements.licenca_valor_sugerido')}}"><%= t('simple_form.labels.license_movement.licenca_valor_sugerido') %></th>
+          <th ng-click="order('license_movements.created_at')" class="{{orderClass('license_movements.created_at')}}"><%= t('simple_form.labels.license_movement.created_at') %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{license_movement.show_html_url}}" ng-repeat="license_movement in license_movements track by license_movement.id">
+        <td class="text-center" title="{{license_movement.status['title']}}"><i class="{{license_movement.status['icon']}}"></i></td>
+        <td>{{license_movement.licenca_descricao}}</td>
+        <td>{{license_movement.licenca_tipo}}</td>
+        <td>{{license_movement.licenca_valor_unitario}}</td>
+        <% if @status == "vendidas" %>
+          <td>{{license_movement.valor_venda_cliente}}</td>
+          <td>{{license_movement.data_venda_cliente}}</td>
+        <% else %>
+          <td>{{license_movement.licenca_valor_sugerido}}</td>
+          <td>{{license_movement.created_at}}</td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="license_movements"
+    url="'<%= representative_license_movements_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

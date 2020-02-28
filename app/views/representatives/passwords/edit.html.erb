@@ -1,0 +1,62 @@
+<%= content_for :class_body, "contrast-background login" %>
+
+<div class="middle-container">
+  <div class="middle-row">
+    <div class="middle-wrapper">
+      <div class="login-container-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <h2>
+                  <%= image_tag "sendmy_sms.png", title: "SendMy", alt: "SendMy", class: "logo" %>
+                  <br><br>
+                  <small>REPRESENTANTE</small>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+              <h1 class="text-center title">Alteração de Senha</h1>
+              <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+                <%= f.input :reset_password_token, as: :hidden %>
+
+                <%= f.input :password, input_html: {autofocus: true}, placeholder: "Nova Senha", required: true %>
+
+                <%= f.input :password_confirmation, placeholder: "Confirmação de Senha", required: true %>
+
+                <%= messages %>
+
+                <div id="mensagens">
+                  <%= content_tag :div, class: "alert alert-danger alert-dismissable" do %>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    O link acessado não é mais válido para alterar a senha.
+                  <% end if resource.errors.try(:messages).try(:[], :reset_password_token).try(:join).try(:present?)  %>
+                </div>
+
+                <%= f.submit "Alterar", class: "btn btn-block" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="login-container-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="text-center">
+                <a target="_blank" href="<%= root_url %>">SendMy | Copyright <%= Time.now.strftime '%Y' %></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

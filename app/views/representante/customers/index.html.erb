@@ -1,0 +1,99 @@
+<% content_for :angular_controller, "CustomerController" %>
+<% content_for :actions do %>
+  <div class="row" id="affix-actions">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="page-header">
+            <h1 class="pull-left">
+              <span>Clientes</span>
+            </h1>
+
+            <%= link_to new_public_customer_path(current_user.representante_principal? ? {} : { representative_id: current_user.id }),
+                  class: "btn pull-right btn-action btn-success", target: :_blank do %>
+              <i class="icon-plus"></i><br>Novo Cliente
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por algum dos campos da tabela", autofocus: true, placeholder: "Pesquisar",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="customers.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="customers">
+    <thead>
+      <tr>
+        <th ng-click="order('nome')" class="{{orderClass('nome')}}">Nome</th>
+        <th ng-click="order('cpf_cnpj')" class="{{orderClass('cpf_cnpj')}}">CPF/CPNJ</th>
+        <th ng-click="order('telefone')" class="{{orderClass('telefone')}}">Telefone</th>
+        <th ng-click="order('email')" class="{{orderClass('email')}}">E-Mail</th>
+        <% if params[:status_venda] == "com_licenca" %>
+          <th ng-click="order('license_movements.licenca_descricao')" class="{{orderClass('license_movements.licenca_descricao')}}">
+            Licença
+          </th>
+          <th ng-click="order('license_movements.data_venda_cliente')" class="{{orderClass('license_movements.data_venda_cliente')}}">
+            Data de Expiração da Licença
+          </th>
+        <% end %>
+
+        <!-- Função de bloquear não está sendo usada ainda
+        <th ng-click="order('status')" class="{{orderClass('status')}} text-center" title="Situação da cadastros">Status</th>
+        -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{customer.show_html_url}}" ng-repeat="customer in customers track by customer.id">
+        <td>{{customer.nome}}</td>
+        <td>{{customer.cpf_cnpj_formatado}}</td>
+        <td>{{customer.telefone_formatado}}</td>
+        <td>{{customer.email}}</td>
+        <% if params[:status_venda] == "com_licenca" %>
+          <td>{{customer.license_movement["licenca_descricao"]}}</td>
+          <td>{{customer.license_movement["validade_fim"]}}</td>
+        <% end %>
+
+        <!-- Função de bloquear não está sendo usada ainda
+        <td class="text-center" title="{{customer.status['title']}}"><i class="{{customer.status['classes']}}"></i></td>
+        -->
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="customers"
+    url="'<%= representative_customers_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

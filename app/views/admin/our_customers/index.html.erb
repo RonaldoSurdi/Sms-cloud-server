@@ -1,0 +1,59 @@
+<% content_for :actions, actions(:our_customer) %>
+<% content_for :angular_controller, "OurCustomerController" %>
+
+<% content_for :filtros do  %>
+  <%= form_tag "", method: :get, "ng-submit" => "pesquisar()" do %>
+    <div class="box-content" ng-init='<%= init_angular([:filter]) %>; canEdit=<%= can?(:update, OurCustomer) %>;'>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <%= label_tag :filter, "Filtro" %>
+          <%= text_field_tag :filter, @filter, title: "Pesquise por campos da tabela", autofocus: true, placeholder: "Pesquisar",
+            class: "form-control input-sm", "ng-model" =>  "filters.filter" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-white pull-right btn-sm" type="button" ng-click="limparFiltros()">Limpar Filtros</button>
+
+          <button class="btn btn-primary pull-right btn-sm" type="submit">
+            <i class="icon-search"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :resultados do  %>
+  <p ng-show="our_customers.length == 0" class="alert alert-info"><i class="icon-info-sign"></i> Nenhum resultado encontrado</p>
+
+  <table class="table table-hover table-striped" ng-show="our_customers">
+    <thead>
+      <tr>
+        <th ng-click="order('our_customers.descricao')" class="{{orderClass('our_customers.descricao')}}">Descricão</th>
+        <th ng-click="order('our_customers.url')" class="{{orderClass('our_customers.url')}}">URL</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr data-href="{{our_customer.show_html_url}}" ng-repeat="our_customer in our_customers track by our_customer.id">
+        <td>{{our_customer.descricao}}</td>
+        <td>{{our_customer.cliente_url}}</td>
+        <td class="text-right">
+          <a href="{{our_customer.edit_html_url}}" class="btn btn-success btn-xs" ng-if="canEdit">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <bgf-pagination
+    collection="our_customers"
+    url="'<%= our_customers_path(format: :json) %>'"
+    template-url="<%= url_template_paginacao %>"
+    url-params="filtersPaginate"
+    size="'sm'"
+    per-page="<%= Kaminari.config.default_per_page %>">
+  </bgf-pagination>
+<% end %>

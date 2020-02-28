@@ -1,0 +1,57 @@
+<div class="container" ng-init="maximoCaracteres = <%= Message::MAX_CHARACTERES %>; config = <%= serialize_json_angular current_user.configuration %>">
+  <div class="row form">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header">
+          <%= link_to "Painel", painel_index_path, class: "link-header" %>&nbsp;
+          <i class="icon-chevron-right"></i>&nbsp;
+
+          <span>Configurações</span>
+        </div>
+
+        <div class="box-content">
+          <%= messages %>
+
+          <%= simple_form_for(current_user.configuration, url: configuracao_path(current_user.configuration)) do |f| %>
+            <div class="row">
+              <div class="col-xs-12">
+
+                <div class="form-inputs">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <%= f.input :send_birthdays, input_html: { 'ng-model' => 'config.send_birthdays' } %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <%= f.input :text_birthdays, as: :text, autofocus: true,
+                          hint: raw("<strong>{{contador = maximoCaracteres - config.text_birthdays.length}}</strong> {{(contador ===  1 ? ' caractere restante' : ' caracteres restantes')}}"),
+                          input_html: {class: 'autosize', maxlength: '{{maximoCaracteres}}', 'ng-model' => 'config.text_birthdays', 'ng-disabled' => '!config.send_birthdays'} %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <%= link_to painel_index_path, class: "btn btn-default col-sm-12" do %>
+                      <i class="icon-arrow-left"></i>&nbsp;&nbsp;
+                      <strong>IR PARA O PAINEL</strong>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-offset-4 col-sm-4">
+                    <button type="submit" name="commit" class="btn btn-success col-sm-12">
+                      <strong>ATUALIZAR</strong>&nbsp;&nbsp;
+                      <i class="icon-ok"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

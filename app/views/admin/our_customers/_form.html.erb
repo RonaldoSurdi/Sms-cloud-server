@@ -1,0 +1,33 @@
+<%= simple_form_for(@our_customer) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :descricao, autofocus: true %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :url %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :logo, as: :file, required: @our_customer.new_record?,
+              hint: "Lembre-se de colocar uma imagem com fundo transparente." %>
+      </div>
+    </div>
+
+    <% if @our_customer.logo.present? %>
+      <div class="row">
+        <br/>
+        <div class="col-md-12">
+          <%= image_tag(@our_customer.logo.url(:thumb)) %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= f.submit "", class: "hide" %>
+  </div>
+<% end %>
